@@ -1,9 +1,9 @@
-using ML.XNCF.Docs.Models.DatabaseModel;
-using Senparc.Scf.XNCFBase.Database;
+using ML.Xncf.Docs.Models.DatabaseModel;
+using Senparc.Ncf.XncfBase.Database;
 using System;
 using System.IO;
 
-namespace ML.XNCF.Docs
+namespace ML.Xncf.Docs
 {
     /// <summary>
     /// 设计时 DbContext 创建（仅在开发时创建 Code-First 的数据库 Migration 使用，在生产环境不会执行）

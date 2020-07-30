@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ML.XNCF.Docs.Models.VD;
-using Senparc.Scf.AreaBase.Admin;
-using Senparc.Scf.AreaBase.Admin.Filters;
-using Senparc.Scf.Core.Models.VD;
-using Senparc.Scf.Core.WorkContext;
-using Senparc.Scf.XNCFBase;
+using ML.Xncf.Docs.Models.VD;
+using Senparc.Ncf.AreaBase.Admin;
+using Senparc.Ncf.AreaBase.Admin.Filters;
+using Senparc.Ncf.Core.Models.VD;
+using Senparc.Ncf.Core.WorkContext;
+using Senparc.Ncf.XncfBase;
 
-namespace ML.XNCF.Docs
+namespace ML.Xncf.Docs
 {
 
     public interface IBaseAdminPageModel : IBasePageModel
@@ -19,13 +19,13 @@ namespace ML.XNCF.Docs
     [AdminAuthorize("AdminOnly")]
     public class BaseAdminPageModel : AdminPageModelBase, IBaseAdminPageModel
     {
-        public ML.XNCF.Docs.Register _XNCFRegister;
-        public ML.XNCF.Docs.Register XNCFRegister
+        public ML.Xncf.Docs.Register _XncfRegister;
+        public ML.Xncf.Docs.Register XncfRegister
         {
             get
             {
-                _XNCFRegister = _XNCFRegister ?? new Register();
-                return _XNCFRegister;
+                _XncfRegister = _XncfRegister ?? new Register();
+                return _XncfRegister;
             }
         }
 

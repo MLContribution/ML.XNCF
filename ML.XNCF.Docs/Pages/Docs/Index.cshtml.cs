@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ML.XNCF.Docs.Models.VD;
-using Senparc.Scf.Core.Cache;
-using Senparc.Scf.Core.Models;
+using ML.Xncf.Docs.Models.VD;
+using Senparc.Ncf.Core.Cache;
+using Senparc.Ncf.Core.Models;
 
-namespace ML.XNCF.Docs
+namespace ML.Xncf.Docs
 {
     public class IndexModel : BasePageModel
     {

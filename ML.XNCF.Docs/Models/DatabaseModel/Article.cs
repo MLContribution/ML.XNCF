@@ -1,9 +1,9 @@
-﻿using ML.XNCF.Docs.Models.DatabaseModel.Dto;
-using Senparc.Scf.Core.Models;
+﻿using ML.Xncf.Docs.Models.DatabaseModel.Dto;
+using Senparc.Ncf.Core.Models;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ML.XNCF.Docs
+namespace ML.Xncf.Docs
 {
     /// <summary>
     /// 文档内容

@@ -6,25 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using ML.XNCF.Docs.Services;
-using Senparc.Scf.Core.Models.DataBaseModel;
-using Senparc.Scf.Service;
-using Senparc.Scf.XNCFBase;
+using ML.Xncf.Docs.Services;
+using Senparc.Ncf.Core.Models.DataBaseModel;
+using Senparc.Ncf.Service;
+using Senparc.Ncf.XncfBase;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using ML.XNCF.Docs.Models.DatabaseModel.Dto;
-using Senparc.Scf.Core.Enums;
+using ML.Xncf.Docs.Models.DatabaseModel.Dto;
+using Senparc.Ncf.Core.Enums;
 
-namespace ML.XNCF.Docs.Areas.MyApp.Pages
+namespace ML.Xncf.Docs.Areas.MyApp.Pages
 {
-    public class Index : Senparc.Scf.AreaBase.Admin.AdminXNCFModulePageModelBase
+    public class Index : Senparc.Ncf.AreaBase.Admin.AdminXncfModulePageModelBase
     {
         public CatalogDto CatalogDto { get; set; }
 
         private readonly CatalogService _catalogService;
         private readonly IServiceProvider _serviceProvider;
-        public Index(IServiceProvider serviceProvider, CatalogService catalogService, Lazy<XNCFModuleService> XNCFModuleService)
-            : base(XNCFModuleService)
+        public Index(IServiceProvider serviceProvider, CatalogService catalogService, Lazy<XncfModuleService> XncfModuleService)
+            : base(XncfModuleService)
         {
             _catalogService = catalogService;
             _serviceProvider = serviceProvider;

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ML.XNCF.Docs\ML.XNCF.Docs.csproj" />
+    <ProjectReference Include="..\ML.Xncf.Docs\ML.Xncf.Docs.csproj" />
   </ItemGroup>
 
 </Project>

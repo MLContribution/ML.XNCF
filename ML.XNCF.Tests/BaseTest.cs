@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Senparc.CO2NET.RegisterServices;
 using System.IO;
 
-namespace ML.XNCF.Tests
+namespace ML.Xncf.Tests
 {
     [TestClass]
     public class BaseTest

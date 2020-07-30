@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Senparc.Scf.Core.Models.DataBaseModel;
+using Senparc.Ncf.Core.Models.DataBaseModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ML.XNCF.Docs.Models
+namespace ML.Xncf.Docs.Models
 {
     public class Docs_ArticleConfigurationMapping : ConfigurationMappingWithIdBase<Article, int>
     {

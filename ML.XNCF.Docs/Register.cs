@@ -3,44 +3,44 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ML.XNCF.Docs.Functions;
-using ML.XNCF.Docs.Models;
-using ML.XNCF.Docs.Models.DatabaseModel;
-using ML.XNCF.Docs.Models.DatabaseModel.Dto;
-using ML.XNCF.Docs.Services;
+using ML.Xncf.Docs.Functions;
+using ML.Xncf.Docs.Models;
+using ML.Xncf.Docs.Models.DatabaseModel;
+using ML.Xncf.Docs.Models.DatabaseModel.Dto;
+using ML.Xncf.Docs.Services;
 using Senparc.CO2NET.Trace;
-using Senparc.Scf.Core.Areas;
-using Senparc.Scf.Core.Config;
-using Senparc.Scf.Core.Enums;
-using Senparc.Scf.Core.Models;
-using Senparc.Scf.XNCFBase;
+using Senparc.Ncf.Core.Areas;
+using Senparc.Ncf.Core.Config;
+using Senparc.Ncf.Core.Enums;
+using Senparc.Ncf.Core.Models;
+using Senparc.Ncf.XncfBase;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ML.XNCF.Docs
+namespace ML.Xncf.Docs
 {
-    public class Register : XNCFRegisterBase,
-        IXNCFRegister, //注册 XNCF 基础模块接口（必须）
-        IAreaRegister, //注册 XNCF 页面接口（按需选用）
-        IXNCFDatabase,  //注册 XNCF 模块数据库（按需选用）
-        IXNCFRazorRuntimeCompilation  //需要使用 RazorRuntimeCompilation，在开发环境下实时更新 Razor Page
+    public class Register : XncfRegisterBase,
+        IXncfRegister, //注册 Xncf 基础模块接口（必须）
+        IAreaRegister, //注册 Xncf 页面接口（按需选用）
+        IXncfDatabase,  //注册 Xncf 模块数据库（按需选用）
+        IXncfRazorRuntimeCompilation  //需要使用 RazorRuntimeCompilation，在开发环境下实时更新 Razor Page
     {
         public Register()
         { }
 
 
-        #region IXNCFRegister 接口
+        #region IXncfRegister 接口
 
-        public override string Name => "ML.XNCF.Docs";
+        public override string Name => "ML.Xncf.Docs";
         public override string Uid => "519E8526-A738-465A-9DB8-2762E8441762";//必须确保全局唯一，生成后必须固定
         public override string Version => "0.0.2.12";//必须填写版本号
 
         public override string MenuName => "开发者文档";
         public override string Icon => "fa fa-dot-circle-o";//参考如：https://colorlib.com/polygon/gentelella/icons.html
-        public override string Description => "这是一个开发者文档项目，用于阐述SCF的架构,便于开发者快速上手并掌握SCF的使用规范及开发方法";
+        public override string Description => "这是一个开发者文档项目，用于阐述Ncf的架构,便于开发者快速上手并掌握Ncf的使用规范及开发方法";
 
         /// <summary>
         /// 注册当前模块需要支持的功能模块
@@ -98,7 +98,7 @@ namespace ML.XNCF.Docs
             //指定需要删除的数据实体
 
             //注意：这里作为演示，删除了所有的表，实际操作过程中，请谨慎操作，并且按照删除顺序对实体进行排序！
-            var dropTableKeys = EntitySetKeys.GetEntitySetInfo(this.XNCFDatabaseDbContextType).Keys.ToArray();
+            var dropTableKeys = EntitySetKeys.GetEntitySetInfo(this.XncfDatabaseDbContextType).Keys.ToArray();
             await base.DropTablesAsync(serviceProvider, mlEntities, dropTableKeys);
 
             await unsinstallFunc().ConfigureAwait(false);
@@ -128,15 +128,15 @@ namespace ML.XNCF.Docs
             return builder;
         }
 
-        public override IServiceCollection AddXNCFModule(IServiceCollection services, IConfiguration configuration)
+        public override IServiceCollection AddXncfModule(IServiceCollection services, IConfiguration configuration)
         {
             //任何需要注册的对象
-            return base.AddXNCFModule(services, configuration);
+            return base.AddXncfModule(services, configuration);
         }
 
         #endregion
 
-        #region IXNCFDatabase 接口
+        #region IXncfDatabase 接口
 
         /// <summary>
         /// 数据库前缀
@@ -148,9 +148,9 @@ namespace ML.XNCF.Docs
         /// </summary>
         public string DatabaseUniquePrefix => DATABASE_PREFIX;
         /// <summary>
-        /// 设置 XNCFSenparcEntities 类型
+        /// 设置 XncfSenparcEntities 类型
         /// </summary>
-        public Type XNCFDatabaseDbContextType => typeof(MLEntities);
+        public Type XncfDatabaseDbContextType => typeof(MLEntities);
 
 
         public void OnModelCreating(ModelBuilder modelBuilder)
@@ -159,7 +159,7 @@ namespace ML.XNCF.Docs
             modelBuilder.ApplyConfiguration(new Docs_ArticleConfigurationMapping());
         }
 
-        public void AddXNCFDatabaseModule(IServiceCollection services)
+        public void AddXncfDatabaseModule(IServiceCollection services)
         {
             //add catalog
             services.AddScoped(typeof(Catalog));
@@ -173,8 +173,8 @@ namespace ML.XNCF.Docs
 
         #endregion
 
-        #region IXNCFRazorRuntimeCompilation 接口
-        public string LibraryPath => Path.GetFullPath(Path.Combine(SiteConfig.WebRootPath, "..", "ML.XNCF.Docs"));
+        #region IXncfRazorRuntimeCompilation 接口
+        public string LibraryPath => Path.GetFullPath(Path.Combine(SiteConfig.WebRootPath, "..", "ML.Xncf.Docs"));
         #endregion
     }
 }

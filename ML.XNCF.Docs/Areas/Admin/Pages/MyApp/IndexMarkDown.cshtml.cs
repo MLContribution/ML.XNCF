@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ML.XNCF.Docs.Areas.Admin.Pages.MyApp
+namespace ML.Xncf.Docs.Areas.Admin.Pages.MyApp
 {
     public class IndexMarkDownModel : PageModel
     {

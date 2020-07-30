@@ -1,23 +1,23 @@
-﻿using ML.XNCF.Docs.Models.DatabaseModel.Dto;
-using Senparc.Scf.Core.Enums;
-using Senparc.Scf.Repository;
-using Senparc.Scf.Service;
+﻿using ML.Xncf.Docs.Models.DatabaseModel.Dto;
+using Senparc.Ncf.Core.Enums;
+using Senparc.Ncf.Repository;
+using Senparc.Ncf.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Senparc.CO2NET.Trace;
 using Microsoft.Extensions.Caching.Distributed;
-using ML.XNCF.Docs.Models.DatabaseModel;
+using ML.Xncf.Docs.Models.DatabaseModel;
 using System.Linq;
-using Senparc.Scf.Core.Models;
+using Senparc.Ncf.Core.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using Senparc.Scf.Core.Models.DataBaseModel;
+using Senparc.Ncf.Core.Models.DataBaseModel;
 
-namespace ML.XNCF.Docs.Services
+namespace ML.Xncf.Docs.Services
 {
     public class ArticleService : ClientServiceBase<Article>
     {

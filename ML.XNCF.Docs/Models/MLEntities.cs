@@ -1,16 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Senparc.Scf.Core.Models;
-using Senparc.Scf.XNCFBase;
-using Senparc.Scf.XNCFBase.Database;
+using Senparc.Ncf.Core.Models;
+using Senparc.Ncf.XncfBase;
+using Senparc.Ncf.XncfBase.Database;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ML.XNCF.Docs.Models.DatabaseModel
+namespace ML.Xncf.Docs.Models.DatabaseModel
 {
-    public class MLEntities : XNCFDatabaseDbContext
+    public class MLEntities : XncfDatabaseDbContext
     {
-        public override IXNCFDatabase XNCFDatabaseRegister => new Register();
+        public override IXncfDatabase XncfDatabaseRegister => new Register();
         public MLEntities(DbContextOptions<MLEntities> dbContextOptions) : base(dbContextOptions)
         {
         }

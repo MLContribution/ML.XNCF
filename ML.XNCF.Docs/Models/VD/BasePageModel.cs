@@ -1,10 +1,10 @@
-﻿using Senparc.Scf.Core.Models;
-using Senparc.Scf.Core.Models.VD;
+﻿using Senparc.Ncf.Core.Models;
+using Senparc.Ncf.Core.Models.VD;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ML.XNCF.Docs.Models.VD
+namespace ML.Xncf.Docs.Models.VD
 {
     public interface IBasePageModel : IPageModelBase
     { }

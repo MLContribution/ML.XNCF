@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ML.XNCF.Docs.Models.DatabaseModel.Dto;
-using ML.XNCF.Docs.Services;
+using ML.Xncf.Docs.Models.DatabaseModel.Dto;
+using ML.Xncf.Docs.Services;
 using Senparc.CO2NET.Trace;
-using Senparc.Scf.Core.Models;
+using Senparc.Ncf.Core.Models;
 
-namespace ML.XNCF.Docs.Areas.Admin.Pages.Document
+namespace ML.Xncf.Docs.Areas.Admin.Pages.Document
 {
     public class EditModel : BaseAdminPageModel
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ML.XNCF.Docs.Migrations
+namespace ML.Xncf.Docs.Migrations
 {
-    public partial class XNCF_Docs_Init_v1 : Migration
+    public partial class Xncf_Docs_Init_v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

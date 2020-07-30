@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ML.XNCF.Docs.Functions;
+using ML.Xncf.Docs.Functions;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ML.XNCF.Tests.Functions
+namespace ML.Xncf.Tests.Functions
 {
     [TestClass]
     public class UpdateDocsTests : BaseTest
@@ -19,16 +19,16 @@ namespace ML.XNCF.Tests.Functions
         [TestMethod]
         public void RunTest()
         {
-            var function = new ML.XNCF.Docs.Functions.UpdateDocs(base.ServiceProvider);
+            var function = new ML.Xncf.Docs.Functions.UpdateDocs(base.ServiceProvider);
             var result = function.Run(new UpdateDocs.UpdateDocs_Parameters());
             Console.WriteLine(result.Log);
             Console.WriteLine("===============");
             Console.WriteLine(result.Message);
 
-            var filePath = Path.Combine(Senparc.CO2NET.Config.RootDictionaryPath, "wwwroot", "ScfDocs", "README.md");
+            var filePath = Path.Combine(Senparc.CO2NET.Config.RootDictionaryPath, "wwwroot", "NcfDocs", "README.md");
             Assert.IsTrue(File.Exists(filePath));//断言文件存在
 
-            var fetchFilePath = Path.Combine(Senparc.CO2NET.Config.RootDictionaryPath, "wwwroot", "ScfDocs", ".git", "FETCH_HEAD");
+            var fetchFilePath = Path.Combine(Senparc.CO2NET.Config.RootDictionaryPath, "wwwroot", "NcfDocs", ".git", "FETCH_HEAD");
             if (File.Exists(fetchFilePath))
             {
                 //更新项目

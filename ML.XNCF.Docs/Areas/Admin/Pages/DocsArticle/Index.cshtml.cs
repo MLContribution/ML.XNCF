@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ML.XNCF.Docs.Services;
-using Senparc.Scf.Core.Models;
+using ML.Xncf.Docs.Services;
+using Senparc.Ncf.Core.Models;
 
-namespace ML.XNCF.Docs.Areas.Admin.Pages.DocsArticle
+namespace ML.Xncf.Docs.Areas.Admin.Pages.DocsArticle
 {
     public class IndexModel : BaseAdminPageModel
     {
@@ -33,7 +33,7 @@ namespace ML.XNCF.Docs.Areas.Admin.Pages.DocsArticle
         /// <returns></returns>
         public async Task OnGetAsync()
         {
-            Articles = await _articleService.GetObjectListAsync(PageIndex, 10, _ => true, _ => _.AddTime, Senparc.Scf.Core.Enums.OrderingType.Descending);
+            Articles = await _articleService.GetObjectListAsync(PageIndex, 10, _ => true, _ => _.AddTime, Senparc.Ncf.Core.Enums.OrderingType.Descending);
         }
 
         public IActionResult OnPostDelete(string[] ids)
