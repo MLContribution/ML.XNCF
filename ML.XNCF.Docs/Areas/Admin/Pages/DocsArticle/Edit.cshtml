@@ -1,0 +1,44 @@
+﻿@page
+@model ML.XNCF.Docs.Areas.Admin.Pages.DocsArticle.EditModel
+@{
+    ViewData["Title"] = $"{(!string.IsNullOrEmpty(Model.Id) ? "编辑" : "新增")}内容";
+}
+@section Style{
+    <link href="~/node_modules/@@ztree/ztree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <link href="~/css/Admin/catalogEdit.css" rel="stylesheet" />
+}
+@section breadcrumbs{
+    <li>开发者文档</li>
+    <li>
+        内容管理
+    </li>
+}
+
+<!-- START row-->
+<div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="treeContainer">
+                    <ul id="tree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 col-sm-10 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                需要添加的内容
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/node_modules/@@ztree/ztree_v3/js/jquery.ztree.core.min.js"></script>
+    <script src="~/node_modules/@@ztree/ztree_v3/js/jquery.ztree.excheck.min.js"></script>
+    <script src="~/node_modules/@@ztree/ztree_v3/js/jquery.ztree.exedit.min.js"></script>
+    <script src="~/js/Admin/Pages/Catalog/Edit.js">
+
+    </script>
+}

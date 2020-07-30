@@ -1,0 +1,19 @@
+﻿@page
+@model ML.XNCF.Docs.Areas.MyApp.Pages.Index
+@addTagHelper *, MyArea
+@{
+    ViewData["Title"] = "目录";
+    Layout = "_XNCFModuleLayout";
+}
+
+<h4>@Model.XNCFModuleDto.MenuName - @SystemTime.Now</h4>
+<h4>@Model.XNCFModuleDto.Description</h4>
+
+<div style="margin:30px 0">
+    <a href="@Url.PageLink(null,"CreateParentCatalog",new { uid = Model.XNCFModuleDto.Uid })" title="创建父级目录" class="btn-lg btn btn-primary"><i class="fa fa-sun-o"></i> 创建父级目录</a>
+
+    <a href="@Model.XNCFRegister.GetAreaUrl("/Admin/Document/Preview")" target="_blank" class="btn-lg btn btn-primary"><i class="fa fa-bookmark-o"></i> 演示文档</a>
+    <a href="@Model.XNCFRegister.GetAreaUrl("/Admin/Document/PreviewContainer")" target="_blank" class="btn-lg btn btn-primary"><i class="fa fa-bookmark-o"></i> 演示文档Container</a>
+</div>
+
+

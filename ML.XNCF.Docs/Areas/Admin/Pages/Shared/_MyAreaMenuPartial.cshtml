@@ -1,0 +1,5 @@
+﻿@model Senparc.Scf.AreaBase.Admin.AdminXNCFModulePageModelBase
+@addTagHelper *, MyArea
+<li><a href="@Model.XNCFRegister.GetAreaHomeUrl()"><i class="fa fa-laptop"></i> 目录管理</a></li>
+<li><a href="@Model.XNCFRegister.GetAreaUrl("/Admin/DocsArticle/Index")"><i class="fa fa-bookmark-o"></i> 内容管理</a></li>
+<li><a href="@Model.XNCFRegister.GetAreaUrl("/Admin/MyArea/Index")"><i class="fa fa-bookmark-o"></i> 随机目录生成</a></li>
