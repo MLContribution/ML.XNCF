@@ -1,9 +1,5 @@
 ﻿using Senparc.Ncf.Core.Models;
-using Senparc.Ncf.Core.Models.DataBaseModel;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace ML.Xncf.Docs.Models.DatabaseModel.Dto
 {

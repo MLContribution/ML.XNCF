@@ -1,5 +1,5 @@
-﻿using ML.Xncf.Docs.Models.DatabaseModel.Dto;
-using Senparc.Ncf.Core.Models;
+﻿using Senparc.Ncf.Core.Models;
+using ML.Xncf.Docs.Models.DatabaseModel.Dto;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
