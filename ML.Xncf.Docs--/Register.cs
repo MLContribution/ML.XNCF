@@ -28,7 +28,7 @@ namespace ML.Xncf.Docs
 
     public override string Uid => "b091bfd3-3f96-4e10-aa0c-06829ee84f90";//必须确保全局唯一，生成后必须固定，已自动生成，也可自行修改
 
-    public override string Version => "2.0.7";//必须填写版本号
+    public override string Version => "2.0.2";//必须填写版本号
 
     public override string MenuName => "NCF开发文档";
 
@@ -53,12 +53,12 @@ namespace ML.Xncf.Docs
         case InstallOrUpdate.Install:
           //新安装
           #region 初始化数据库数据
-          //var colorService = serviceProvider.GetService<ColorService>();
-          //var color = colorService.GetObject(z => true);
-          //if (color == null)//如果是纯第一次安装，理论上不会有残留数据
-          //{
-          //  ColorDto colorDto = await colorService.CreateNewColor().ConfigureAwait(false);//创建默认颜色
-          //}
+          var colorService = serviceProvider.GetService<ColorService>();
+          var color = colorService.GetObject(z => true);
+          if (color == null)//如果是纯第一次安装，理论上不会有残留数据
+          {
+            ColorDto colorDto = await colorService.CreateNewColor().ConfigureAwait(false);//创建默认颜色
+          }
           #endregion
 
           //新安装,建目录
@@ -86,8 +86,6 @@ namespace ML.Xncf.Docs
     public override async Task UninstallAsync(IServiceProvider serviceProvider, Func<Task> unsinstallFunc)
     {
       #region 删除数据库（演示）
-
-      SenparcTrace.Log("演示卸载模块");
 
       DocsSenparcEntities mySenparcEntities = serviceProvider.GetService<DocsSenparcEntities>();
 
@@ -122,6 +120,22 @@ namespace ML.Xncf.Docs
       modelBuilder.ApplyConfiguration(new Docs_ArticleConfigurationMapping());
     }
 
+    public void AddXscfDatabaseModule(IServiceCollection services)
+    {
+      //add catalog
+      services.AddScoped(typeof(Catalog));
+      services.AddScoped(typeof(CatalogDto));
+      services.AddScoped(typeof(CatalogService));
+      //add article
+      services.AddScoped(typeof(Article));
+      services.AddScoped(typeof(ArticleDto));
+      services.AddScoped(typeof(ArticleService));
+    }
+
+    #endregion
+
+    #region IXscfRazorRuntimeCompilation 接口
+    //public string LibraryPath => Path.GetFullPath(Path.Combine(SiteConfig.WebRootPath, "..", "ML.Xscf.Docs"));
     #endregion
   }
 }

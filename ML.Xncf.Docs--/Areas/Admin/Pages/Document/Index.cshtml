@@ -1,13 +1,13 @@
 ﻿@page
-@model ML.Xncf.Docs.Areas.DocsArticle.Pages.IndexModel
+@model ML.Xncf.Docs.Areas.Admin.Pages.Document.IndexModel
 @{
-    ViewData["Title"] = "内容管理";
+    ViewData["Title"] = "目录管理";
 }
 
 @section breadcrumbs{
     <li>开发者文档</li>
     <li>
-        内容管理
+        目录管理
     </li>
 }
 
@@ -81,14 +81,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.Articles)
+                            @foreach (var item in Model.Catalogs)
                             {
                                 <tr class="pointer">
                                     <td class="a-center ">
                                         <input type="checkbox" class="flat table_records" name="ids" form="deleteForm" value="@item.Id">
                                     </td>
                                     <td class=" ">@item.Id</td>
-                                    <td class=" ">@item.CatalogMark </td>
+                                    <td class=" ">@item.Name </td>
                                     <td class=" "> @item.AddTime.ToShortDateString()</td>
                                     <td class=" ">
                                         <a asp-page="Edit" asp-route-id="@item.Id" title="编辑" class="btn-xs btn btn-info">
@@ -104,7 +104,7 @@
                     </table>
                 </div>
                 <div class="text-center p jpagerbar">
-                    @*@Html.Raw((Html.PagerBar(Model.Articles, new PagerBarSettings(Url.Page("/Article/Index", new
+                    @*@Html.Raw((Html.PagerBar(Model.Catalogs, new PagerBarSettings(Url.Page("/Document/Index", new
        {
            pageIndex = "{0}"
        }))

@@ -1,24 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
+using ML.Xncf.Docs;
 using ML.Xncf.Docs.Models.DatabaseModel.Dto;
 using ML.Xncf.Docs.Services;
-using Senparc.Ncf.Core.Enums;
 using Senparc.Ncf.Core.Models;
 using Senparc.Ncf.Service;
 using System;
 using System.Threading.Tasks;
 
-namespace ML.Xncf.Docs.Areas.DocsArticle.Pages
+namespace ML.Xncf.Docs.Areas.Admin.Pages.Document
 {
   public class IndexModel : Senparc.Ncf.AreaBase.Admin.AdminXncfModulePageModelBase
   {
-    private readonly ArticleService _articleService;
-    private readonly IServiceProvider _serviceProvider;
+    private readonly CatalogService _catalogService;
 
-    public IndexModel(IServiceProvider serviceProvider, ArticleService articleService, Lazy<XncfModuleService> xncfModuleService) : base(xncfModuleService)
+    public IndexModel(IServiceProvider serviceProvider, CatalogService catalogService, Lazy<XncfModuleService> xncfModuleService) : base(xncfModuleService)
     {
-      CurrentMenu = "Article";
-      _articleService = articleService;
-      _serviceProvider = serviceProvider;
+      CurrentMenu = "Catalog";
+      _catalogService = catalogService;
     }
 
     [BindProperty(SupportsGet = true)]
@@ -27,7 +25,7 @@ namespace ML.Xncf.Docs.Areas.DocsArticle.Pages
     /// <summary>
     /// 
     /// </summary>
-    public PagedList<Article> Articles { get; set; }
+    public PagedList<Catalog> Catalogs { get; set; }
 
     /// <summary>
     /// 
@@ -35,14 +33,14 @@ namespace ML.Xncf.Docs.Areas.DocsArticle.Pages
     /// <returns></returns>
     public async Task OnGetAsync()
     {
-      Articles = await _articleService.GetObjectListAsync(PageIndex, 10, _ => true, _ => _.AddTime, OrderingType.Descending);
+      Catalogs = await _catalogService.GetObjectListAsync(PageIndex, 10, _ => true, _ => _.AddTime, Senparc.Ncf.Core.Enums.OrderingType.Descending);
     }
 
     public IActionResult OnPostDelete(string[] ids)
     {
       foreach (var id in ids)
       {
-        _articleService.DeleteObject(_ => _.Id == Convert.ToInt32(id));
+        _catalogService.DeleteObject(_ => _.Id == Convert.ToInt32(id));
       }
 
       return RedirectToPage("./Index");

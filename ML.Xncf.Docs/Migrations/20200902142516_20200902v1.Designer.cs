@@ -4,14 +4,16 @@ using ML.Xncf.Docs.Models.DatabaseModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ML.Xncf.Docs.Migrations
 {
     [DbContext(typeof(DocsSenparcEntities))]
-    partial class DocsSenparcEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20200902142516_20200902v1")]
+    partial class _20200902v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
