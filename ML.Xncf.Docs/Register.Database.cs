@@ -5,6 +5,7 @@ using Senparc.Ncf.XncfBase;
 using System;
 using ML.Xncf.Docs.Models.DatabaseModel.Dto;
 using ML.Xncf.Docs.Services;
+using ML.Xncf.Docs.Models;
 
 namespace ML.Xncf.Docs
 {
@@ -13,10 +14,39 @@ namespace ML.Xncf.Docs
   {
     #region IXncfDatabase 接口
 
+    ///// <summary>
+    ///// 数据库前缀
+    ///// </summary>
+    //public const string DATABASE_PREFIX = "ML_Docs_";
+
+    ///// <summary>
+    ///// 数据库前缀
+    ///// </summary>
+    //public string DatabaseUniquePrefix => DATABASE_PREFIX;
+    ///// <summary>
+    ///// 设置 XncfSenparcEntities 类型
+    ///// </summary>
+    //public Type XncfDatabaseDbContextType => typeof(DocsSenparcEntities);
+
+    //public void AddXncfDatabaseModule(IServiceCollection services)
+    //{
+    //  //DOT REMOVE OR MODIFY THIS LINE 请勿移除或修改本行 - Entities Point
+    //  //ex. services.AddScoped(typeof(Color));
+
+    //  //add catalog
+    //  services.AddScoped(typeof(Catalog));
+    //  services.AddScoped(typeof(CatalogDto));
+    //  services.AddScoped(typeof(CatalogService));
+    //  //add article
+    //  services.AddScoped(typeof(Article));
+    //  services.AddScoped(typeof(ArticleDto));
+    //  services.AddScoped(typeof(ArticleService));
+    //}
+
     /// <summary>
     /// 数据库前缀
     /// </summary>
-    public const string DATABASE_PREFIX = "ML_Docs_";
+    public const string DATABASE_PREFIX = "Docs_";
 
     /// <summary>
     /// 数据库前缀
@@ -25,13 +55,17 @@ namespace ML.Xncf.Docs
     /// <summary>
     /// 设置 XncfSenparcEntities 类型
     /// </summary>
-    public Type XncfDatabaseDbContextType => typeof(DocsSenparcEntities);
+    public Type XncfDatabaseDbContextType => typeof(MLEntities);
+
+
+    public void OnModelCreating(ModelBuilder modelBuilder)
+    {
+      modelBuilder.ApplyConfiguration(new Docs_CatalogConfigurationMapping());
+      modelBuilder.ApplyConfiguration(new Docs_ArticleConfigurationMapping());
+    }
 
     public void AddXncfDatabaseModule(IServiceCollection services)
     {
-      //DOT REMOVE OR MODIFY THIS LINE 请勿移除或修改本行 - Entities Point
-      //ex. services.AddScoped(typeof(Color));
-
       //add catalog
       services.AddScoped(typeof(Catalog));
       services.AddScoped(typeof(CatalogDto));

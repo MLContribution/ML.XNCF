@@ -1,14 +1,15 @@
-using Microsoft.AspNetCore.Mvc;
-using ML.Xncf.Docs.Models.DatabaseModel.Dto;
-using ML.Xncf.Docs.Services;
-using Senparc.Ncf.Core.Models;
-using Senparc.Ncf.Service;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using ML.Xncf.Docs.Models.VD;
+using Senparc.Ncf.Service;
 
 namespace ML.Xncf.Docs.Areas.Admin.Pages.Document
 {
-  public class PreviewContainerModel : Senparc.Ncf.AreaBase.Admin.AdminXncfModulePageModelBase
+  public class PreviewContainerModel : BaseAdminDocsModel
   {
     public PreviewContainerModel(Lazy<XncfModuleService> xncfModuleService) : base(xncfModuleService)
     {

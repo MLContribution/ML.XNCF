@@ -1,22 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ML.Xncf.Docs;
-using ML.Xncf.Docs.Models.DatabaseModel.Dto;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using ML.Xncf.Docs.Models.VD;
 using ML.Xncf.Docs.Services;
 using Senparc.Ncf.Core.Models;
 using Senparc.Ncf.Service;
-using System;
-using System.Threading.Tasks;
 
 namespace ML.Xncf.Docs.Areas.Admin.Pages.Document
 {
-  public class IndexModel : Senparc.Ncf.AreaBase.Admin.AdminXncfModulePageModelBase
+  public class IndexModel : BaseAdminDocsModel
   {
     private readonly CatalogService _catalogService;
 
-    public IndexModel(IServiceProvider serviceProvider, CatalogService catalogService, Lazy<XncfModuleService> xncfModuleService) : base(xncfModuleService)
+    public IndexModel(Lazy<XncfModuleService> xncfModuleService, CatalogService _catalogService) : base(xncfModuleService)
     {
       CurrentMenu = "Catalog";
-      _catalogService = catalogService;
+      this._catalogService = _catalogService;
     }
 
     [BindProperty(SupportsGet = true)]

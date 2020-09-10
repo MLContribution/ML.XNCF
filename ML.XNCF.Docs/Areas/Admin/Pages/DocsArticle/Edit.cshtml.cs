@@ -1,22 +1,28 @@
-using Microsoft.AspNetCore.Mvc;
-using ML.Xncf.Docs.Models.DatabaseModel.Dto;
-using ML.Xncf.Docs.Services;
-using Senparc.Ncf.Service;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using ML.Xncf.Docs.Models.DatabaseModel.Dto;
+using ML.Xncf.Docs.Models.VD;
+using ML.Xncf.Docs.Services;
+using Senparc.CO2NET.Trace;
+using Senparc.Ncf.Core.Models;
+using Senparc.Ncf.Service;
 
 namespace ML.Xncf.Docs.Areas.Admin.Pages.DocsArticle
 {
-  public class EditModel : Senparc.Ncf.AreaBase.Admin.AdminXncfModulePageModelBase
+  public class EditModel : BaseAdminDocsModel
   {
     private readonly ArticleService _articleService;
     private readonly CatalogService _catalogService;
 
-    public EditModel(IServiceProvider serviceProvider, ArticleService articleService, CatalogService catalogService, Lazy<XncfModuleService> xncfModuleService) : base(xncfModuleService)
+    public EditModel(Lazy<XncfModuleService> xncfModuleService, ArticleService _articleService, CatalogService _catalogService) : base(xncfModuleService)
     {
       CurrentMenu = "Article";
-      _articleService = articleService;
-      _catalogService = catalogService;
+      this._articleService = _articleService;
+      this._catalogService = _catalogService;
     }
 
     [BindProperty(SupportsGet = true)]

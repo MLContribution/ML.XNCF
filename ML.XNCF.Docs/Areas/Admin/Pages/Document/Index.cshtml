@@ -83,7 +83,7 @@
                         <tbody>
                             @foreach (var item in Model.Catalogs)
                             {
-                                <tr class="pointer">
+                                <!--<tr class="pointer">
                                     <td class="a-center ">
                                         <input type="checkbox" class="flat table_records" name="ids" form="deleteForm" value="@item.Id">
                                     </td>
@@ -93,12 +93,12 @@
                                     <td class=" ">
                                         <a asp-page="Edit" asp-route-id="@item.Id" title="编辑" class="btn-xs btn btn-info">
                                             <em class="fa fa-pencil-square-o">编辑</em>
-                                        </a>
+                                        </a>-->
                                         @*<button data-content="@item.Id" title="复制商品链接" class="copyLink btn-xs btn btn-default">
                                                 复制<em class="fa fa-clone"></em>
                                             </button>*@
-                                    </td>
-                                </tr>
+                                    <!--</td>
+                                </tr>-->
                             }
                         </tbody>
                     </table>

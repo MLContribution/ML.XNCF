@@ -1,5 +1,5 @@
 ﻿@page
-@model ML.Xncf.Docs.Areas.DocsArticle.Pages.IndexModel
+@model ML.Xncf.Docs.Areas.Admin.Pages.DocsArticle.IndexModel
 @{
     ViewData["Title"] = "内容管理";
 }
@@ -104,14 +104,14 @@
                     </table>
                 </div>
                 <div class="text-center p jpagerbar">
-                    @*@Html.Raw((Html.PagerBar(Model.Articles, new PagerBarSettings(Url.Page("/Article/Index", new
+                    @Html.Raw((Html.PagerBar(Model.Articles, new PagerBarSettings(Url.Page("/Article/Index", new
        {
            pageIndex = "{0}"
        }))
        {
            NoRecordTip = "暂无数据",
            ShowTotalCount = true
-       })))*@
+       })))
                 </div>
             </div>
         </div>
