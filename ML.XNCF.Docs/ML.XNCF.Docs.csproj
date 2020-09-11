@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>2.0.14-beta1</Version>
+    <Version>2.0.28-beta1</Version>
     <AssemblyName>ML.Xncf.Docs</AssemblyName>
     <RootNamespace>ML.Xncf.Docs</RootNamespace>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
@@ -40,25 +40,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Static\**" />
-    <Content Remove="Static\**" />
-    <EmbeddedResource Remove="Static\**" />
-    <None Remove="Static\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\css\Admin\catalogEdit.css" />
-    <Content Remove="wwwroot\css\Admin\docs.css" />
-    <Content Remove="wwwroot\js\Admin\docs.js" />
-    <Content Remove="wwwroot\js\Admin\Pages\Catalog\Edit.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="wwwroot\css\Admin\catalogEdit.css" />
-    <EmbeddedResource Include="wwwroot\css\Admin\docs.css" />
-    <EmbeddedResource Include="wwwroot\js\Admin\docs.js" />
-    <EmbeddedResource Include="wwwroot\js\Admin\Pages\Catalog\Edit.js" />
-  </ItemGroup>
+		<EmbeddedResource Include="wwwroot\**\*" />
+		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.6" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="LibGit2Sharp" Version="0.26.2" />

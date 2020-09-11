@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using ML.Xncf.Docs.Functions;
 using ML.Xncf.Docs.Models;
 using ML.Xncf.Docs.Models.DatabaseModel;
 using ML.Xncf.Docs.Models.DatabaseModel.Dto;
 using ML.Xncf.Docs.Services;
+using Senparc.CO2NET.RegisterServices;
 using Senparc.CO2NET.Trace;
 using Senparc.Ncf.Core.Areas;
 using Senparc.Ncf.Core.Config;
@@ -18,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ML.Xncf.Docs
@@ -36,7 +40,7 @@ namespace ML.Xncf.Docs
 
     public override string Name => "ML.Xncf.Docs";
     public override string Uid => "b091bfd3-3f96-4e10-aa0c-06829ee84f90";//必须确保全局唯一，生成后必须固定
-    public override string Version => "2.0.14";//必须填写版本号
+    public override string Version => "2.0.28";//必须填写版本号
 
     public override string MenuName => "开发者文档";
     public override string Icon => "fa fa-dot-circle-o";//参考如：https://colorlib.com/polygon/gentelella/icons.html
@@ -104,77 +108,15 @@ namespace ML.Xncf.Docs
       await unsinstallFunc().ConfigureAwait(false);
     }
 
-    #endregion
+    public override IApplicationBuilder UseXncfModule(IApplicationBuilder app, IRegisterService registerService)
+    {
+      app.UseStaticFiles(new StaticFileOptions
+      {
+        FileProvider = new ManifestEmbeddedFileProvider(Assembly.GetExecutingAssembly(), "wwwroot")
+      });
 
-    #region IAreaRegister 接口
-
-    //public string HomeUrl => "/Admin/Document/Index";
-
-    //public List<AreaPageMenuItem> AareaPageMenuItems => new List<AreaPageMenuItem>() {
-    //         new AreaPageMenuItem(GetAreaHomeUrl(),"目录管理","fa fa-laptop"),
-    //         new AreaPageMenuItem(GetAreaUrl("/Admin/DocsArticle/Index"),"内容管理","fa fa-bookmark-o"),
-    //         new AreaPageMenuItem(GetAreaUrl("/Admin/MyApp/Index"),"随机目录生成","fa fa-bookmark-o"),
-    //    };
-
-    //public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IWebHostEnvironment env)
-    //{
-    //  builder.AddRazorPagesOptions(options =>
-    //  {
-    //          //此处可配置页面权限
-    //        });
-
-    //  SenparcTrace.SendCustomLog("系统启动", "完成 Area:MyApp 注册");
-
-    //  return builder;
-    //}
-
-    //public override IServiceCollection AddXncfModule(IServiceCollection services, IConfiguration configuration)
-    //{
-    //  //任何需要注册的对象
-    //  return base.AddXncfModule(services, configuration);
-    //}
-
-    #endregion
-
-    #region IXncfDatabase 接口
-
-    ///// <summary>
-    ///// 数据库前缀
-    ///// </summary>
-    //public const string DATABASE_PREFIX = "Docs_";
-
-    ///// <summary>
-    ///// 数据库前缀
-    ///// </summary>
-    //public string DatabaseUniquePrefix => DATABASE_PREFIX;
-    ///// <summary>
-    ///// 设置 XncfSenparcEntities 类型
-    ///// </summary>
-    //public Type XncfDatabaseDbContextType => typeof(MLEntities);
-
-
-    //public void OnModelCreating(ModelBuilder modelBuilder)
-    //{
-    //  modelBuilder.ApplyConfiguration(new Docs_CatalogConfigurationMapping());
-    //  modelBuilder.ApplyConfiguration(new Docs_ArticleConfigurationMapping());
-    //}
-
-    //public void AddXncfDatabaseModule(IServiceCollection services)
-    //{
-    //  //add catalog
-    //  services.AddScoped(typeof(Catalog));
-    //  services.AddScoped(typeof(CatalogDto));
-    //  services.AddScoped(typeof(CatalogService));
-    //  //add article
-    //  services.AddScoped(typeof(Article));
-    //  services.AddScoped(typeof(ArticleDto));
-    //  services.AddScoped(typeof(ArticleService));
-    //}
-
-    #endregion
-
-    #region IXncfRazorRuntimeCompilation 接口
-    //public string LibraryPath => Path.GetFullPath(Path.Combine(SiteConfig.WebRootPath, "..", "ML.Xncf.Docs"));
+      return base.UseXncfModule(app, registerService);
+    }
     #endregion
   }
 }
