@@ -30,7 +30,7 @@ namespace ML.Xncf.Docs.Functions
         //注意：Name 必须在单个 Xncf 模块中唯一！
         public override string Name => "更新文档";
 
-        public override string Description => "从 Gitee 上更新最新的官方文档。官方地址：https://gitee.com/SenparcCoreFramework/ScfDocs";
+        public override string Description => "从 GitHub 上更新最新的官方文档。官方地址：https://github.com/NeuCharFramework/NcfDocs.git";
         public override Type FunctionParameterType => typeof(UpdateDocs_Parameters);
 
         public UpdateDocs(IServiceProvider serviceProvider) : base(serviceProvider)
@@ -48,13 +48,13 @@ namespace ML.Xncf.Docs.Functions
             return FunctionHelper.RunFunction<UpdateDocs_Parameters>(param, (typeParam, sb, result) =>
                {
                    var wwwrootDir = Path.Combine(Senparc.CO2NET.Config.RootDictionaryPath, "wwwroot");
-                   var copyDir = Path.Combine(wwwrootDir, "ScfDocs");
+                   var copyDir = Path.Combine(wwwrootDir, "NcfDocs");
 
                    //创建目录
                    FileHelper.TryCreateDirectory(wwwrootDir);
                    FileHelper.TryCreateDirectory(copyDir);
 
-                   var gitUrl = "https://gitee.com/SenparcCoreFramework/ScfDocs.git";
+                   var gitUrl = "https://github.com/NeuCharFramework/NcfDocs.git";
                    try
                    {
                        Repository.Clone(gitUrl, copyDir, new CloneOptions()

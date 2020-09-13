@@ -40,7 +40,7 @@ namespace ML.Xncf.Docs
 
     public override string Name => "ML.Xncf.Docs";
     public override string Uid => "b091bfd3-3f96-4e10-aa0c-06829ee84f90";//必须确保全局唯一，生成后必须固定
-    public override string Version => "2.0.28";//必须填写版本号
+    public override string Version => "2.0.43";//必须填写版本号
 
     public override string MenuName => "开发者文档";
     public override string Icon => "fa fa-dot-circle-o";//参考如：https://colorlib.com/polygon/gentelella/icons.html
