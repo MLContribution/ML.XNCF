@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>2.0.48-beta1</Version>
+    <Version>2.0.51-beta1</Version>
     <AssemblyName>ML.Xncf.Docs</AssemblyName>
     <RootNamespace>ML.Xncf.Docs</RootNamespace>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
@@ -25,6 +25,7 @@
       v0.0.1.94 增加下载源码的功能
       v0.0.2.12 增加自动下载Docs的功能
       v2.0.43 完善文档的刷新功能
+      v2.0.51 完成文章自动安装，自动更新
     </PackageReleaseNotes>
     <RepositoryUrl> https://github.com/zhao365845726/ML.Xncf.git </RepositoryUrl>
     <Configurations>Debug;Release;Test</Configurations>
