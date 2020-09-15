@@ -32,18 +32,37 @@ namespace ML.Xncf.Docs
                       //IXncfDatabase,  //注册 Xncf 模块数据库（按需选用）
                       //IXncfRazorRuntimeCompilation  //需要使用 RazorRuntimeCompilation，在开发环境下实时更新 Razor Page
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public Register()
         { }
 
 
         #region IXncfRegister 接口
-
+        /// <summary>
+        /// [必填项]模块名称
+        /// </summary>
         public override string Name => "ML.Xncf.Docs";
-        public override string Uid => "b091bfd3-3f96-4e10-aa0c-06829ee84f90";//必须确保全局唯一，生成后必须固定
-        public override string Version => "2.0.51";//必须填写版本号
-
+        /// <summary>
+        /// [必填项]模块Id,必须确保全局唯一，生成后必须固定
+        /// </summary>
+        public override string Uid => "b091bfd3-3f96-4e10-aa0c-06829ee84f90";
+        /// <summary>
+        /// [必填项]必须填写版本号
+        /// </summary>
+        public override string Version => "2.0.53";
+        /// <summary>
+        /// [必填项]菜单名称
+        /// </summary>
         public override string MenuName => "开发者文档";
-        public override string Icon => "fa fa-dot-circle-o";//参考如：https://colorlib.com/polygon/gentelella/icons.html
+        /// <summary>
+        /// 菜单图标(参考资源如：https://colorlib.com/polygon/gentelella/icons.html)
+        /// </summary>
+        public override string Icon => "fa fa-book";
+        /// <summary>
+        /// 模块说明
+        /// </summary>
         public override string Description => "这是一个开发者文档项目，用于阐述SCF的架构,便于开发者快速上手并掌握SCF的使用规范及开发方法";
 
         /// <summary>
@@ -112,6 +131,12 @@ namespace ML.Xncf.Docs
             await unsinstallFunc().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// 使用Xncf模块
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="registerService"></param>
+        /// <returns></returns>
         public override IApplicationBuilder UseXncfModule(IApplicationBuilder app, IRegisterService registerService)
         {
             app.UseStaticFiles(new StaticFileOptions
