@@ -1,25 +1,43 @@
 ﻿@page
 @model ML.Xncf.Docs.Areas.Admin.Pages.Document.PreviewModel
 @{
-    Layout = "_XncfModuleDocsLayout";
+  //UI框架参考：https://element.eleme.cn/#/zh-CN
+  ViewData["Title"] = "欢迎使用SCF开发者文档";
+  Layout = "_Layout_Vue";
 }
-@{
-    ViewData["Title"] = "欢迎使用SCF开发者文档";
-}
-@section Style{
-    <link rel="stylesheet" href="~/node_modules/editor.md/examples/css/style.css" />
-    <link rel="stylesheet" href="~/node_modules/editor.md/css/editormd.preview.css" />
+
+@section HeaderContent{
+  <link rel="stylesheet" href="~/js/editor-md/examples/css/style.css" />
+  <link rel="stylesheet" href="~/js/editor-md/css/editormd.preview.css" />
 }
 
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div id="layout">
-            <div id="test-editormd-view">
-                <textarea style="display:none;" name="test-editormd-markdown-doc">###Hello world!</textarea>
-            </div>
-            <div id="test-editormd-view2">
-                <textarea id="append-test" style="display:none;">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div id="layout">
+      <div id="test-editormd-view">
+        <textarea style="display:none;" name="test-editormd-markdown-doc">###Hello world!</textarea>
+      </div>
+      <div id="test-editormd-view2">
+        <textarea id="append-test" style="display:none;">
 <img src="https://weixin.senparc.com/images/SCF/logo.png" width="300" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -33,7 +51,19 @@ SenparcCoreFramework(SCF) 是一整套可用于构建基础项目的框架，包
 
 > 说明：SCF 由盛派（Senparc）团队经过多年优化迭代的自用系统底层框架 SenparcCore 整理而来，经历了 .NET 3.5/4.5 众多系统的实战检验，并最终移植到 .NET Core，目前已在多个 .NET Core 系统中稳定运行，在将其转型为开源项目的过程中，需要进行一系列的重构、注释完善和兼容性升级，目前尚处于雏形阶段，希望大家多提意见，我们会争取在最短的时间内优化并发布第一个试用版（Preview1）。感谢大家一直以来的支持！<br>
 
+
+
+
+
+
+
 > <br>
+
+
+
+
+
+
 
 > Preview1 版本中，我们将提供更加完善的模块化架构和辅助工具，当前源码已经可用于学习和测试使用。
 
@@ -63,6 +93,18 @@ SCF 除了会为大家提供完善的框架代码，还会：
 ## QQ 技术交流群
 
 <img src="https://sdk.weixin.senparc.com/images/QQ_Group_Avatar/SCF/QQ-Group.jpg" width="380" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -113,8 +155,38 @@ Done.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 `方法二结果`
 <img src="https://weixin.senparc.com/images/SCF/Installs/02.2.png" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -134,9 +206,33 @@ Done.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 点击【立即安装】按钮：
 
 <img src="https://weixin.senparc.com/images/SCF/Installs/03.2.png" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -145,6 +241,24 @@ Done.
 随后，系统将自动完成初始化安装，此时页面会提示默认管理员账号和密码，请记住这两个参数，以后将无法明文找回！
 
 <img src="https://weixin.senparc.com/images/SCF/Installs/03.3.png" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -159,9 +273,39 @@ Done.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 5. 完成登录
 
 <img src="https://weixin.senparc.com/images/SCF/Installs/05.png" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -188,6 +332,18 @@ SCF 的扩展模块代号为 `Xncf`。
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 > 说明：`Senparc.Xncf.ChangeNamespace` 模块在 SCF 源码中已默认装载，无需从 nuget 下载。
 
 #### 第二步：进入管理员后台的 【扩展模块】 > 【模块管理】
@@ -195,6 +351,24 @@ SCF 的扩展模块代号为 `Xncf`。
 此时可已经可以看到系统自动扫描到了新增模块：
 
 <img src="https://weixin.senparc.com/images/SCF/XncfModules/02.png" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -208,11 +382,35 @@ SCF 的扩展模块代号为 `Xncf`。
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ### 如何使用已安装的模块？
 
 在上一步模块详情页中，列出了当前模块支持的所有功能的列表：
 
 <img src="https://weixin.senparc.com/images/SCF/XncfModules/04.png" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -224,6 +422,18 @@ SCF 的扩展模块代号为 `Xncf`。
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 按照提示输入对应的参数，点击【运行】按钮，即可执行此模块的此项功能。
 
 执行完成后可以看到提示信息：
@@ -232,9 +442,39 @@ SCF 的扩展模块代号为 `Xncf`。
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 程序中所有命名空间已被批量修改：
 
 <img src="https://weixin.senparc.com/images/SCF/XncfModules/07.png" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -253,9 +493,33 @@ SCF 的扩展模块代号为 `Xncf`。
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 或 `模块详情页面`
 
 <img src="https://weixin.senparc.com/images/SCF/XncfModules/09.png" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -282,68 +546,79 @@ SCF 的扩展模块代号为 `Xncf`，您可以在 [ScfPackageSources](https://g
   - [x] 可定制默认加载模块
 
                 </textarea>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
-
-<script type="text/javascript">
-    $(function () {
-        var testEditormdView, testEditormdView2;
-
-        $.get("~/node_modules/editor.md/test.md", function (markdown) {
-
-            testEditormdView = editormd.markdownToHTML("test-editormd-view", {
-                markdown: markdown,//+ "\r\n" + $("#append-test").text(),
-                //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
-                htmlDecode: "style,script,iframe",  // you can filter tags decode
-                //toc             : false,
-                tocm: true,    // Using [TOCM]
-                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
-                //gfm             : false,
-                //tocDropdown     : true,
-                // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
-                emoji: true,
-                taskList: true,
-                tex: true,  // 默认不解析
-                flowChart: true,  // 默认不解析
-                sequenceDiagram: true,  // 默认不解析
-            });
-
-            //console.log("返回一个 jQuery 实例 =>", testEditormdView);
-
-            // 获取Markdown源码
-            //console.log(testEditormdView.getMarkdown());
-
-            //alert(testEditormdView.getMarkdown());
-        });
-
-        testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
-            htmlDecode: "style,script,iframe",  // you can filter tags decode
-            emoji: true,
-            taskList: true,
-            tex: true,  // 默认不解析
-            flowChart: true,  // 默认不解析
-            sequenceDiagram: true,  // 默认不解析
-        });
-    });
-</script>
-
 @section scripts{
-    <!-- <script src="js/zepto.min.js"></script>
-    <script>
-        var jQuery = Zepto;  // 为了避免修改flowChart.js和sequence-diagram.js的源码，所以使用Zepto.js时想支持flowChart/sequenceDiagram就得加上这一句
-    </script> -->
-    <script src="~/node_modules/editor.md/examples/js/jquery.min.js"></script>
-    <script src="~/node_modules/editor.md/lib/marked.min.js"></script>
-    <script src="~/node_modules/editor.md/lib/prettify.min.js"></script>
+  @*<script src="~/js/Admin/Pages/Document/Index.js"></script>*@
 
-    <script src="~/node_modules/editor.md/lib/raphael.min.js"></script>
-    <script src="~/node_modules/editor.md/lib/underscore.min.js"></script>
-    <script src="~/node_modules/editor.md/lib/sequence-diagram.min.js"></script>
-    <script src="~/node_modules/editor.md/lib/flowchart.min.js"></script>
-    <script src="~/node_modules/editor.md/lib/jquery.flowchart.min.js"></script>
+  <script src="~/js/editor-md/examples/js/jquery.min.js"></script>
+  <script src="~/js/editor-md/lib/marked.min.js"></script>
+  <script src="~/js/editor-md/lib/prettify.min.js"></script>
 
-    <script src="~/node_modules/editor.md/editormd.js"></script>
+  <script src="~/js/editor-md/lib/raphael.min.js"></script>
+  <script src="~/js/editor-md/lib/underscore.min.js"></script>
+  <script src="~/js/editor-md/lib/sequence-diagram.min.js"></script>
+  <script src="~/js/editor-md/lib/flowchart.min.js"></script>
+  <script src="~/js/editor-md/lib/jquery.flowchart.min.js"></script>
+
+  <script src="~/js/editor-md/editormd.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: function () {
+        return {
+
+        }
+      },
+      methods: {
+
+      }
+    })
+  </script>
+
+  <script type="text/javascript">
+    $(function () {
+      var testEditormdView, testEditormdView2;
+
+      $.get("~/js/editor-md/test.md", function (markdown) {
+
+        testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+          markdown: markdown,//+ "\r\n" + $("#append-test").text(),
+          //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+          htmlDecode: "style,script,iframe",  // you can filter tags decode
+          //toc             : false,
+          tocm: true,    // Using [TOCM]
+          //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+          //gfm             : false,
+          //tocDropdown     : true,
+          // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+          emoji: true,
+          taskList: true,
+          tex: true,  // 默认不解析
+          flowChart: true,  // 默认不解析
+          sequenceDiagram: true,  // 默认不解析
+        });
+
+        //console.log("返回一个 jQuery 实例 =>", testEditormdView);
+
+        // 获取Markdown源码
+        //console.log(testEditormdView.getMarkdown());
+
+        //alert(testEditormdView.getMarkdown());
+      });
+
+      testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
+        htmlDecode: "style,script,iframe",  // you can filter tags decode
+        emoji: true,
+        taskList: true,
+        tex: true,  // 默认不解析
+        flowChart: true,  // 默认不解析
+        sequenceDiagram: true,  // 默认不解析
+      });
+    });
+  </script>
 }

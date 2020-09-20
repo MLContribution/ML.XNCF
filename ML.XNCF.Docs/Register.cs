@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 
 namespace ML.Xncf.Docs
 {
+    [XncfOrder(9999)]
     public partial class Register : XncfRegisterBase,
         IXncfRegister, //注册 Xncf 基础模块接口（必须）
         IAreaRegister //注册 Xncf 页面接口（按需选用）
@@ -51,7 +52,7 @@ namespace ML.Xncf.Docs
         /// <summary>
         /// [必填项]必须填写版本号
         /// </summary>
-        public override string Version => "2.0.53";
+        public override string Version => "2.0.65";
         /// <summary>
         /// [必填项]菜单名称
         /// </summary>

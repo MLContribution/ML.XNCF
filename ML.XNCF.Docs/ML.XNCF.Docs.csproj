@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>2.0.53-beta1</Version>
+    <Version>2.0.65-beta1</Version>
     <AssemblyName>ML.Xncf.Docs</AssemblyName>
     <RootNamespace>ML.Xncf.Docs</RootNamespace>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
@@ -26,6 +26,7 @@
       v0.0.2.12 增加自动下载Docs的功能
       v2.0.43 完善文档的刷新功能
       v2.0.51 完成文章自动安装，自动更新
+      v2.0.65 去掉无用的菜单项，保留整洁的内容
     </PackageReleaseNotes>
     <RepositoryUrl> https://github.com/zhao365845726/ML.Xncf.git </RepositoryUrl>
     <Configurations>Debug;Release;Test</Configurations>
@@ -43,6 +44,11 @@
 
   <ItemGroup>
 		<EmbeddedResource Include="wwwroot\**\*" />
+		<Content Remove="wwwroot\js\editor-md\editormd.amd.js" />
+		<Content Remove="wwwroot\js\editor-md\editormd.amd.min.js" />
+		<Content Remove="wwwroot\js\editor-md\editormd.js" />
+		<Content Remove="wwwroot\js\editor-md\editormd.min.js" />
+		<Content Remove="wwwroot\js\editor-md\test.md" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.6" />
 	</ItemGroup>
 
@@ -58,12 +64,12 @@
     </PackageReference>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
-    <PackageReference Include="Senparc.Ncf.AreaBase" Version="0.3.501-beta1" />
-    <PackageReference Include="Senparc.Ncf.XncfBase" Version="0.3.501-beta1" />
-    <PackageReference Include="Senparc.Ncf.Core" Version="0.3.501-beta1" />
-    <PackageReference Include="Senparc.Ncf.Service" Version="0.3.501-beta1" />
-    <PackageReference Include="Senparc.Ncf.Repository" Version="0.3.501-beta1" />
-    <PackageReference Include="Senparc.Ncf.Mvc.UI" Version="0.3.501-beta1" />
+    <PackageReference Include="Senparc.Ncf.AreaBase" Version="0.3.506-beta1" />
+    <PackageReference Include="Senparc.Ncf.XncfBase" Version="0.3.506.2-beta1" />
+    <PackageReference Include="Senparc.Ncf.Core" Version="0.3.506-beta1" />
+    <PackageReference Include="Senparc.Ncf.Service" Version="0.3.506-beta1" />
+    <PackageReference Include="Senparc.Ncf.Repository" Version="0.3.506-beta1" />
+    <PackageReference Include="Senparc.Ncf.Mvc.UI" Version="0.3.506-beta1" />
   </ItemGroup>
 
   <ItemGroup>

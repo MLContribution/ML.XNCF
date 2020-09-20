@@ -13,15 +13,23 @@
 }
 
 @section HeaderContent{
-
+  <style>
+    .el-row{
+       margin-bottom:20px;
+    }
+  </style>
 }
 
 @*<h1>装修升级中,敬请期待....</h1>*@
 
 <el-row>
+  <el-button type="primary" @@click="viewDocs">查看文档</el-button>
+</el-row>
+
+<el-row>
   <el-button type="primary">创建父级目录</el-button>
-  <el-button type="success">演示文档</el-button>
-  <el-button type="info">演示文档</el-button>
+  <el-button type="success" @@click="viewPreview">演示文档</el-button>
+  <el-button type="info" @@click="viewPreviewContainer">演示文档</el-button>
 </el-row>
 
 @section scripts{
@@ -34,11 +42,15 @@
         }
       },
       methods: {
-        handleEdit(index, row) {
-          console.log(index, row);
+        // 更新新增、编辑
+        viewDocs() {
+          location.href = "/Docs/Index";
         },
-        handleDelete(index, row) {
-          console.log(index, row);
+        viewPreview() {
+          location.href = "/Admin/Document/Preview";
+        },
+        viewPreviewContainer() {
+          location.href = "/Admin/Document/PreviewContainer";
         }
       }
     })

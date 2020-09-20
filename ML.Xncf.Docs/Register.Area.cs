@@ -14,12 +14,12 @@ namespace ML.Xncf.Docs
 	{
 		#region IAreaRegister 接口
 
-		public string HomeUrl => "/Admin/Document/Index";
+		public string HomeUrl => "/Docs/Index";
 
 		public List<AreaPageMenuItem> AareaPageMenuItems => new List<AreaPageMenuItem>() {
-						 new AreaPageMenuItem(GetAreaHomeUrl(),"目录管理","fa fa-laptop"),
-						 new AreaPageMenuItem(GetAreaUrl("/Admin/DocsArticle/Index"),"内容管理","fa fa-bookmark-o"),
-						 new AreaPageMenuItem(GetAreaUrl("/Admin/MyApp/Index"),"随机目录生成","fa fa-bookmark-o"),
+						 new AreaPageMenuItem(GetAreaHomeUrl(),"开发者文档中心","fa fa-laptop"),
+						 //new AreaPageMenuItem(GetAreaUrl("/Admin/DocsArticle/Index"),"内容管理","fa fa-bookmark-o"),
+						 //new AreaPageMenuItem(GetAreaUrl("/Admin/MyApp/Index"),"随机目录生成","fa fa-bookmark-o"),
 				};
 
 		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IWebHostEnvironment env)
