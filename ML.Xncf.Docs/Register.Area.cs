@@ -22,19 +22,19 @@ namespace ML.Xncf.Docs
 						 //new AreaPageMenuItem(GetAreaUrl("/Admin/MyApp/Index"),"随机目录生成","fa fa-bookmark-o"),
 				};
 
-		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IWebHostEnvironment env)
-		{
-			builder.AddRazorPagesOptions(options =>
-			{
-				//此处可配置页面权限
-			});
+        public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IWebHostEnvironment env)
+        {
+            //builder.AddRazorPagesOptions(options =>
+            //{
+            //    //此处可配置页面权限
+            //});
 
-			SenparcTrace.SendCustomLog("系统启动", "完成 Area:MyApp 注册");
+            SenparcTrace.SendCustomLog("系统启动", "完成 Area:MyApp 注册");
 
-			return builder;
-		}
+            return builder;
+        }
 
-		public override IServiceCollection AddXncfModule(IServiceCollection services, IConfiguration configuration)
+        public override IServiceCollection AddXncfModule(IServiceCollection services, IConfiguration configuration)
 		{
 			//任何需要注册的对象
 			return base.AddXncfModule(services, configuration);

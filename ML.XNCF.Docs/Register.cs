@@ -52,7 +52,7 @@ namespace ML.Xncf.Docs
         /// <summary>
         /// [必填项]必须填写版本号
         /// </summary>
-        public override string Version => "2.0.65";
+        public override string Version => "2.0.70";
         /// <summary>
         /// [必填项]菜单名称
         /// </summary>
@@ -83,7 +83,7 @@ namespace ML.Xncf.Docs
         public override async Task InstallOrUpdateAsync(IServiceProvider serviceProvider, InstallOrUpdate installOrUpdate)
         {
             //更新数据库
-            await base.MigrateDatabaseAsync<MLEntities>(serviceProvider);
+            //await base.MigrateDatabaseAsync<MLEntities>(serviceProvider);
             UpdateDocs updateDocs = new UpdateDocs(serviceProvider);
             IFunctionParameter functionParameter = null;
 
@@ -91,18 +91,18 @@ namespace ML.Xncf.Docs
             {
                 case InstallOrUpdate.Install:
                     //新安装,建目录
-                    var catalogService = serviceProvider.GetService<CatalogService>();
-                    var catalogRows = catalogService.GetCount(z => true);
-                    if (catalogRows <= 0)
-                    {
-                        await catalogService.InitCatalog();
-                    }
-                    var articleService = serviceProvider.GetService<ArticleService>();
-                    var articleRows = articleService.GetCount(w => true);
-                    if (articleRows <= 0)
-                    {
-                        await articleService.InitArticle();
-                    }
+                    //var catalogService = serviceProvider.GetService<CatalogService>();
+                    //var catalogRows = catalogService.GetCount(z => true);
+                    //if (catalogRows <= 0)
+                    //{
+                    //    await catalogService.InitCatalog();
+                    //}
+                    //var articleService = serviceProvider.GetService<ArticleService>();
+                    //var articleRows = articleService.GetCount(w => true);
+                    //if (articleRows <= 0)
+                    //{
+                    //    await articleService.InitArticle();
+                    //}
                     _ = updateDocs.Run(functionParameter);
                     break;
                 case InstallOrUpdate.Update:

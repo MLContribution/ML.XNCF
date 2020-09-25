@@ -11,13 +11,17 @@ using Senparc.Ncf.Service;
 
 namespace ML.Xncf.Docs
 {
-  public class IndexModel : BaseAdminDocsModel
-  {
-    public IndexModel(Lazy<XncfModuleService> xncfModuleService) : base(xncfModuleService)
+  public class IndexModel : PageModel
     {
-    }
+        public IndexModel()
+        {
+        }
 
-    public async Task<IActionResult> OnGetAsync()
+        //public IndexModel(Lazy<XncfModuleService> xncfModuleService) : base(xncfModuleService)
+        //{
+        //}
+
+        public async Task<IActionResult> OnGetAsync()
     {
       return Page();
     }

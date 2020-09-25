@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>2.0.65-beta1</Version>
+    <Version>2.0.70-beta1</Version>
     <AssemblyName>ML.Xncf.Docs</AssemblyName>
     <RootNamespace>ML.Xncf.Docs</RootNamespace>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
@@ -17,16 +17,17 @@
     <PackageProjectUrl>https://github.com/zhao365845726/ML.Xncf</PackageProjectUrl>
     <PackageIconUrl>http://image.milisx.com/logox200.png</PackageIconUrl>
     <PackageReleaseNotes>
-      v0.0.1 创世
-      v0.0.1.18 增加目录及内容
-      v0.0.1.50 开发者演示文档上线
-      v0.0.1.91 MD文档框架引入
-      v0.0.1.92 增加Md的公共文件，更新各依赖的版本
-      v0.0.1.94 增加下载源码的功能
-      v0.0.2.12 增加自动下载Docs的功能
-      v2.0.43 完善文档的刷新功能
-      v2.0.51 完成文章自动安装，自动更新
-      v2.0.65 去掉无用的菜单项，保留整洁的内容
+        v0.0.1 创世
+        v0.0.1.18 增加目录及内容
+        v0.0.1.50 开发者演示文档上线
+        v0.0.1.91 MD文档框架引入
+        v0.0.1.92 增加Md的公共文件，更新各依赖的版本
+        v0.0.1.94 增加下载源码的功能
+        v0.0.2.12 增加自动下载Docs的功能
+        v2.0.43 完善文档的刷新功能
+        v2.0.51 完成文章自动安装，自动更新
+        v2.0.65 去掉无用的菜单项，保留整洁的内容
+        v2.0.70 去掉登录验证
     </PackageReleaseNotes>
     <RepositoryUrl> https://github.com/zhao365845726/ML.Xncf.git </RepositoryUrl>
     <Configurations>Debug;Release;Test</Configurations>
