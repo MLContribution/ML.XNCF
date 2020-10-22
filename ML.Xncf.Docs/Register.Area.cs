@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Senparc.CO2NET.Trace;
 using Senparc.Ncf.Core.Areas;
@@ -17,27 +16,19 @@ namespace ML.Xncf.Docs
 		public string HomeUrl => "/Docs/Index";
 
 		public List<AreaPageMenuItem> AareaPageMenuItems => new List<AreaPageMenuItem>() {
-						 new AreaPageMenuItem(GetAreaHomeUrl(),"开发者文档中心","fa fa-laptop"),
-						 //new AreaPageMenuItem(GetAreaUrl("/Admin/DocsArticle/Index"),"内容管理","fa fa-bookmark-o"),
-						 //new AreaPageMenuItem(GetAreaUrl("/Admin/MyApp/Index"),"随机目录生成","fa fa-bookmark-o"),
-				};
+			 new AreaPageMenuItem(GetAreaHomeUrl(),"开发者文档中心","fa fa-laptop"),
+			 		};
 
-        public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IWebHostEnvironment env)
-        {
-            //builder.AddRazorPagesOptions(options =>
-            //{
-            //    //此处可配置页面权限
-            //});
-
-            SenparcTrace.SendCustomLog("系统启动", "完成 Area:MyApp 注册");
-
-            return builder;
-        }
-
-        public override IServiceCollection AddXncfModule(IServiceCollection services, IConfiguration configuration)
+		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IWebHostEnvironment env)
 		{
-			//任何需要注册的对象
-			return base.AddXncfModule(services, configuration);
+			builder.AddRazorPagesOptions(options =>
+			{
+				//此处可配置页面权限
+			});
+
+			SenparcTrace.SendCustomLog("Docs 启动", "完成 Area:ML.Xncf.Docs 注册");
+
+			return builder;
 		}
 
 		#endregion

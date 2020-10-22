@@ -1,108 +1,49 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
+﻿using System;
+using System.Collections.Generic;
+using Senparc.Ncf.XncfBase;
 using ML.Xncf.Docs.Functions;
-using ML.Xncf.Docs.Models;
 using ML.Xncf.Docs.Models.DatabaseModel;
-using ML.Xncf.Docs.Models.DatabaseModel.Dto;
-using ML.Xncf.Docs.Services;
-using Senparc.CO2NET.RegisterServices;
-using Senparc.CO2NET.Trace;
-using Senparc.Ncf.Core.Areas;
-using Senparc.Ncf.Core.Config;
 using Senparc.Ncf.Core.Enums;
 using Senparc.Ncf.Core.Models;
-using Senparc.Ncf.XncfBase;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Senparc.Ncf.Database;
 
 namespace ML.Xncf.Docs
 {
-    [XncfOrder(9999)]
-    public partial class Register : XncfRegisterBase,
-        IXncfRegister, //注册 Xncf 基础模块接口（必须）
-        IAreaRegister //注册 Xncf 页面接口（按需选用）
-                      //IXncfDatabase,  //注册 Xncf 模块数据库（按需选用）
-                      //IXncfRazorRuntimeCompilation  //需要使用 RazorRuntimeCompilation，在开发环境下实时更新 Razor Page
+    [XncfRegister]
+    public partial class Register : XncfRegisterBase, IXncfRegister
     {
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public Register()
-        { }
+        #region IRegister 接口
 
-
-        #region IXncfRegister 接口
-        /// <summary>
-        /// [必填项]模块名称
-        /// </summary>
         public override string Name => "ML.Xncf.Docs";
-        /// <summary>
-        /// [必填项]模块Id,必须确保全局唯一，生成后必须固定
-        /// </summary>
-        public override string Uid => "b091bfd3-3f96-4e10-aa0c-06829ee84f90";
-        /// <summary>
-        /// [必填项]必须填写版本号
-        /// </summary>
-        public override string Version => "2.0.70";
-        /// <summary>
-        /// [必填项]菜单名称
-        /// </summary>
+
+        public override string Uid => "C31EB06B-D0EE-4356-9313-9DD842E0B9D2";//必须确保全局唯一，生成后必须固定，已自动生成，也可自行修改
+
+        public override string Version => "2.0.85";//必须填写版本号
+
         public override string MenuName => "开发者文档";
-        /// <summary>
-        /// 菜单图标(参考资源如：https://colorlib.com/polygon/gentelella/icons.html)
-        /// </summary>
+
         public override string Icon => "fa fa-book";
-        /// <summary>
-        /// 模块说明
-        /// </summary>
-        public override string Description => "这是一个开发者文档项目，用于阐述SCF的架构,便于开发者快速上手并掌握SCF的使用规范及开发方法";
 
-        /// <summary>
-        /// 注册当前模块需要支持的功能模块
-        /// </summary>
-        public override IList<Type> Functions => new Type[] {
-            typeof(UpdateDocs)
-        };
+        public override string Description => "这是一个开发者文档项目，用于阐述NCF的架构,便于开发者快速上手并掌握NCF的使用规范及开发方法";
+
+        public override IList<Type> Functions => new Type[] { typeof(UpdateDocs) /*typeof(BuildXncf)*/ };
 
 
-        /// <summary>
-        /// 安装或更新过程需要执行的业务
-        /// </summary>
-        /// <param name="serviceProvider"></param>
-        /// <param name="installOrUpdate"></param>
-        /// <returns></returns>
         public override async Task InstallOrUpdateAsync(IServiceProvider serviceProvider, InstallOrUpdate installOrUpdate)
         {
-            //更新数据库
-            //await base.MigrateDatabaseAsync<MLEntities>(serviceProvider);
+            //安装或升级版本时更新数据库
+            await base.MigrateDatabaseAsync(serviceProvider);
             UpdateDocs updateDocs = new UpdateDocs(serviceProvider);
             IFunctionParameter functionParameter = null;
 
+            //根据安装或更新不同条件执行逻辑
             switch (installOrUpdate)
             {
                 case InstallOrUpdate.Install:
-                    //新安装,建目录
-                    //var catalogService = serviceProvider.GetService<CatalogService>();
-                    //var catalogRows = catalogService.GetCount(z => true);
-                    //if (catalogRows <= 0)
-                    //{
-                    //    await catalogService.InitCatalog();
-                    //}
-                    //var articleService = serviceProvider.GetService<ArticleService>();
-                    //var articleRows = articleService.GetCount(w => true);
-                    //if (articleRows <= 0)
-                    //{
-                    //    await articleService.InitArticle();
-                    //}
+                    //新安装
                     _ = updateDocs.Run(functionParameter);
                     break;
                 case InstallOrUpdate.Update:
@@ -113,40 +54,25 @@ namespace ML.Xncf.Docs
                     throw new ArgumentOutOfRangeException();
             }
         }
-        /// <summary>
-        /// 删除模块时需要执行的业务
-        /// </summary>
-        /// <param name="serviceProvider"></param>
-        /// <param name="unsinstallFunc"></param>
-        /// <returns></returns>
+
         public override async Task UninstallAsync(IServiceProvider serviceProvider, Func<Task> unsinstallFunc)
         {
-            MLEntities mlEntities = serviceProvider.GetService<MLEntities>();
+            #region 删除数据库（演示）
+
+            var mySenparcEntitiesType = this.TryGetXncfDatabaseDbContextType;
+            DocsSenparcEntities mySenparcEntities = serviceProvider.GetService(mySenparcEntitiesType) as DocsSenparcEntities;
 
             //指定需要删除的数据实体
 
-            //注意：这里作为演示，删除了所有的表，实际操作过程中，请谨慎操作，并且按照删除顺序对实体进行排序！
-            var dropTableKeys = EntitySetKeys.GetEntitySetInfo(this.XncfDatabaseDbContextType).Keys.ToArray();
-            await base.DropTablesAsync(serviceProvider, mlEntities, dropTableKeys);
+            //注意：这里作为演示，在卸载模块的时候删除了所有本模块创建的表，实际操作过程中，请谨慎操作，并且按照删除顺序对实体进行排序！
+            var dropTableKeys = EntitySetKeys.GetEntitySetInfo(this.TryGetXncfDatabaseDbContextType).Keys.ToArray();
+            await base.DropTablesAsync(serviceProvider, mySenparcEntities, dropTableKeys);
+
+            #endregion
 
             await unsinstallFunc().ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// 使用Xncf模块
-        /// </summary>
-        /// <param name="app"></param>
-        /// <param name="registerService"></param>
-        /// <returns></returns>
-        public override IApplicationBuilder UseXncfModule(IApplicationBuilder app, IRegisterService registerService)
-        {
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new ManifestEmbeddedFileProvider(Assembly.GetExecutingAssembly(), "wwwroot")
-            });
-
-            return base.UseXncfModule(app, registerService);
-        }
         #endregion
     }
 }
