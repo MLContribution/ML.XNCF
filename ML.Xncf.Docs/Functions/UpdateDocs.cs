@@ -60,6 +60,7 @@ namespace ML.Xncf.Docs.Functions
                        Repository.Clone(gitUrl, copyDir, new CloneOptions()
                        {
                            IsBare = false,
+                           RecurseSubmodules = true
                        });
                    }
                    catch (Exception)
@@ -89,6 +90,33 @@ namespace ML.Xncf.Docs.Functions
 
                    result.Message = $"更新成功，当前版本：{versionData.Version}，更新时间：{versionData.UpdateTime.ToShortDateString()}，What's New：{versionData.WhatsNew ?? "无"}";
                });
+        }
+
+        /// <summary>
+        /// 清理
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public FunctionResult Clear(IFunctionParameter param)
+        {
+            /* 这里是处理文字选项（单选）的一个示例 */
+            return FunctionHelper.RunFunction<UpdateDocs_Parameters>(param, (typeParam, sb, result) =>
+            {
+                var wwwrootDir = Path.Combine(Senparc.CO2NET.Config.RootDictionaryPath, "wwwroot");
+                var copyDir = Path.Combine(wwwrootDir, "NcfDocs");
+                try
+                {
+                    //清理目录
+                    Directory.Delete(copyDir, true);
+                }
+                catch (Exception)
+                {
+                    sb.AppendLine("清理失败");
+                }
+                sb.AppendLine($"清理目录 {copyDir}");
+
+                result.Message = $"清理成功，清理时间：{DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}";
+            });
         }
     }
 }
