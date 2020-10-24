@@ -6,6 +6,8 @@ using Senparc.Ncf.XncfBase.Functions;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Senparc.CO2NET;
+using System.Diagnostics;
 
 namespace ML.Xncf.Docs.Functions
 {
@@ -65,11 +67,19 @@ namespace ML.Xncf.Docs.Functions
                    }
                    catch (Exception)
                    {
+                       if (Directory.Exists(copyDir))
+                       {
+                           string strClearDirCommand = $"rmdir /s /q {copyDir}";
+                           string strExecRes = ExeCommand($"{strClearDirCommand}");
+                           result.Message = $"清理完成,请再次执行更新";
+                           return;
+                       }
 
                        var mergeResult = LibGit2Sharp.Commands.Pull(
-                                                    new Repository(copyDir),
-                                                    new Signature("zhao365845726@163.com", "zhao365845726@163.com", SystemTime.Now),
-                                                    new PullOptions());
+                                                 new Repository(copyDir),
+                                                 new Signature("zhao365845726@163.com", "zhao365845726@163.com", SystemTime.Now),
+                                                 new PullOptions());
+
                        sb.AppendLine("已有文件存在，开始 pull 更新");
                        sb.AppendLine(mergeResult.Status.ToString());
                    }
@@ -108,6 +118,11 @@ namespace ML.Xncf.Docs.Functions
                 {
                     //清理目录
                     Directory.Delete(copyDir, true);
+                    if (Directory.Exists(copyDir))
+                    {
+                        string strClearDirCommand = $"rmdir /s /q {copyDir}";
+                        string strExecRes = ExeCommand($"{strClearDirCommand}");
+                    }
                 }
                 catch (Exception)
                 {
@@ -117,6 +132,51 @@ namespace ML.Xncf.Docs.Functions
 
                 result.Message = $"清理成功，清理时间：{DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}";
             });
+        }
+
+        /// <summary>
+        /// 执行cmd.exe命令
+        /// </summary>
+        /// <param name="commandText">命令文本</param>
+        /// <returns>命令输出文本</returns>
+        private string ExeCommand(string commandText)
+        {
+            return ExeCommand(new string[] { commandText });
+        }
+
+        /// <summary>
+        /// 执行多条cmd.exe命令
+        /// </summary>
+        /// <param name="commandTexts">命令文本数组</param>
+        /// <returns>命令输出文本</returns>
+        private string ExeCommand(string[] commandTexts)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            string strOutput = null;
+            try
+            {
+                p.Start();
+                foreach (string item in commandTexts)
+                {
+                    p.StandardInput.WriteLine(item);
+                }
+                p.StandardInput.WriteLine("exit");
+                strOutput = p.StandardOutput.ReadToEnd();
+                //strOutput = Encoding.UTF8.GetString(Encoding.Default.GetBytes(strOutput));
+                p.WaitForExit();
+                p.Close();
+            }
+            catch (Exception e)
+            {
+                strOutput = e.Message;
+            }
+            return strOutput;
         }
     }
 }
