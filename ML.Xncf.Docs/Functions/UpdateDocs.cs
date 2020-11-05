@@ -51,7 +51,6 @@ namespace ML.Xncf.Docs.Functions
                {
                    var wwwrootDir = Path.Combine(Senparc.CO2NET.Config.RootDictionaryPath, "wwwroot");
                    var copyDir = Path.Combine(wwwrootDir, "NcfDocs");
-
                    //创建目录
                    FileHelper.TryCreateDirectory(wwwrootDir);
                    FileHelper.TryCreateDirectory(copyDir);
@@ -69,7 +68,7 @@ namespace ML.Xncf.Docs.Functions
                    {
                        if (Directory.Exists(copyDir))
                        {
-                           string strClearDirCommand = $"rmdir /s /q {copyDir}";
+                           string strClearDirCommand = $"RD /s /q {copyDir}";
                            string strExecRes = ExeCommand($"{strClearDirCommand}");
                            result.Message = $"清理完成,请再次执行更新";
                            return;
@@ -120,7 +119,7 @@ namespace ML.Xncf.Docs.Functions
                     Directory.Delete(copyDir, true);
                     if (Directory.Exists(copyDir))
                     {
-                        string strClearDirCommand = $"rmdir /s /q {copyDir}";
+                        string strClearDirCommand = $"RD /s /q {copyDir}";
                         string strExecRes = ExeCommand($"{strClearDirCommand}");
                     }
                 }
