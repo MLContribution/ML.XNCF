@@ -66,13 +66,13 @@ namespace ML.Xncf.Docs.Functions
                    }
                    catch (Exception)
                    {
-                       if (Directory.Exists(copyDir))
-                       {
-                           string strClearDirCommand = $"RD /s /q {copyDir}";
-                           string strExecRes = ExeCommand($"{strClearDirCommand}");
-                           result.Message = $"清理完成,请再次执行更新";
-                           return;
-                       }
+                       //if (Directory.Exists(copyDir))
+                       //{
+                       //    string strClearDirCommand = $"RD /s /q {copyDir}";
+                       //    string strExecRes = ExeCommand($"{strClearDirCommand}");
+                       //    result.Message = $"清理完成,请再次执行更新";
+                       //    return;
+                       //}
 
                        var mergeResult = LibGit2Sharp.Commands.Pull(
                                                  new Repository(copyDir),
