@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Version>2.0.106</Version>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Version>2.0.107</Version>
         <AssemblyName>ML.Xncf.Docs</AssemblyName>
         <RootNamespace>ML.Xncf.Docs</RootNamespace>
         <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
@@ -29,6 +29,7 @@
             v2.0.70 去掉登录验证
             v2.0.85 更新库
             v2.0.100 增加卸载则清空，即插即用
+            v2.0.107 兼容支持.net core 3.1和.net core 5
         </PackageReleaseNotes>
         <RepositoryUrl> https://github.com/zhao365845726/ML.Xncf.git </RepositoryUrl>
         <Configurations>Debug;Release;Test</Configurations>
@@ -44,14 +45,16 @@
         <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Senparc.Ncf.XncfBase" Version="0.5.340-beta1" />
+        <PackageReference Include="Senparc.Ncf.XncfBase" Version="0.6.101-beta1" />
         <!--<ProjectReference Include="..\Senparc.Core\Senparc.Core.csproj" />
         <ProjectReference Include="..\Senparc.Service\Senparc.Service.csproj" />-->
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
-        <PackageReference Include="Senparc.Ncf.AreaBase" Version="0.5.340-beta1" />
+        <PackageReference Include="Senparc.Ncf.AreaBase" Version="0.6.101-beta1" />
+        <!-- 为解决 VS 2019 v16.8 的一个bug，需要添加下方引用 -->
+        <PackageReference Include="Microsoft.NET.Sdk.Razor" Version="3.1.10" />
     </ItemGroup>
 
     <ItemGroup>

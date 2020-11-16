@@ -19,7 +19,7 @@ namespace ML.Xncf.Docs
 			 new AreaPageMenuItem(GetAreaHomeUrl(),"开发者文档中心","fa fa-laptop"),
 			 		};
 
-		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IWebHostEnvironment env)
+		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder)
 		{
 			builder.AddRazorPagesOptions(options =>
 			{
