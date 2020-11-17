@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Senparc.CO2NET.Trace;
 using Senparc.Ncf.Core.Areas;
 using Senparc.Ncf.Core.Config;
@@ -19,7 +20,7 @@ namespace ML.Xncf.Docs
 			 new AreaPageMenuItem(GetAreaHomeUrl(),"开发者文档中心","fa fa-laptop"),
 			 		};
 
-		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder)
+		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IHostEnvironment env)
 		{
 			builder.AddRazorPagesOptions(options =>
 			{
@@ -31,10 +32,10 @@ namespace ML.Xncf.Docs
 			return builder;
 		}
 
-		#endregion
+        #endregion
 
-		#region IXncfRazorRuntimeCompilation 接口
-		public string LibraryPath => Path.GetFullPath(Path.Combine(SiteConfig.WebRootPath, "..", "..", "ML.Xncf.Docs"));
+        #region IXncfRazorRuntimeCompilation 接口
+        public string LibraryPath => Path.GetFullPath(Path.Combine(SiteConfig.WebRootPath, "..", "..", "ML.Xncf.Docs"));
 		#endregion
 	}
 }
