@@ -23,9 +23,9 @@ namespace ML.Xncf.Docs.Functions
             cmdHelper = new CMD();
         }
 
-        public override string Name => "清理文档";
+        public override string Name => "强制删除文档";
 
-        public override string Description => "清理掉本地存在的文档内容";
+        public override string Description => "强制删除本地存在的文档内容";
 
         public override Type FunctionParameterType => typeof(ClearDocs_Parameters);
 
