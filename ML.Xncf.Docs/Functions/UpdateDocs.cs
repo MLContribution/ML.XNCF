@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using Senparc.CO2NET;
 using System.Diagnostics;
+using ML.Xncf.Docs.Util;
 
 namespace ML.Xncf.Docs.Functions
 {
@@ -35,8 +36,11 @@ namespace ML.Xncf.Docs.Functions
         public override string Description => "从 GitHub 上更新最新的官方文档。官方地址：https://gitee.com/NeuCharFramework/NcfDocs";
         public override Type FunctionParameterType => typeof(UpdateDocs_Parameters);
 
+        public CMD cmdHelper;
+
         public UpdateDocs(IServiceProvider serviceProvider) : base(serviceProvider)
         {
+            cmdHelper = new CMD();
         }
 
         /// <summary>
@@ -60,20 +64,11 @@ namespace ML.Xncf.Docs.Functions
                    {
                        Repository.Clone(gitUrl, copyDir, new CloneOptions()
                        {
-                           IsBare = false,
-                           RecurseSubmodules = true
+                           IsBare = false
                        });
                    }
                    catch (Exception)
                    {
-                       //if (Directory.Exists(copyDir))
-                       //{
-                       //    string strClearDirCommand = $"RD /s /q {copyDir}";
-                       //    string strExecRes = ExeCommand($"{strClearDirCommand}");
-                       //    result.Message = $"清理完成,请再次执行更新";
-                       //    return;
-                       //}
-
                        var mergeResult = LibGit2Sharp.Commands.Pull(
                                                  new Repository(copyDir),
                                                  new Signature("zhao365845726@163.com", "zhao365845726@163.com", SystemTime.Now),
@@ -115,13 +110,10 @@ namespace ML.Xncf.Docs.Functions
                 var copyDir = Path.Combine(wwwrootDir, "NcfDocs");
                 try
                 {
+                    cmdHelper.ExeCommand($"TASKKILL /F /IM node.exe /T");
+                    cmdHelper.ExeCommand($"RD /s /q {copyDir}");
                     //清理目录
                     Directory.Delete(copyDir, true);
-                    if (Directory.Exists(copyDir))
-                    {
-                        string strClearDirCommand = $"RD /s /q {copyDir}";
-                        string strExecRes = ExeCommand($"{strClearDirCommand}");
-                    }
                 }
                 catch (Exception)
                 {
@@ -133,49 +125,6 @@ namespace ML.Xncf.Docs.Functions
             });
         }
 
-        /// <summary>
-        /// 执行cmd.exe命令
-        /// </summary>
-        /// <param name="commandText">命令文本</param>
-        /// <returns>命令输出文本</returns>
-        private string ExeCommand(string commandText)
-        {
-            return ExeCommand(new string[] { commandText });
-        }
-
-        /// <summary>
-        /// 执行多条cmd.exe命令
-        /// </summary>
-        /// <param name="commandTexts">命令文本数组</param>
-        /// <returns>命令输出文本</returns>
-        private string ExeCommand(string[] commandTexts)
-        {
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.CreateNoWindow = true;
-            string strOutput = null;
-            try
-            {
-                p.Start();
-                foreach (string item in commandTexts)
-                {
-                    p.StandardInput.WriteLine(item);
-                }
-                p.StandardInput.WriteLine("exit");
-                strOutput = p.StandardOutput.ReadToEnd();
-                //strOutput = Encoding.UTF8.GetString(Encoding.Default.GetBytes(strOutput));
-                p.WaitForExit();
-                p.Close();
-            }
-            catch (Exception e)
-            {
-                strOutput = e.Message;
-            }
-            return strOutput;
-        }
+        
     }
 }
