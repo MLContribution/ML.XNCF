@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ML.Xncf.Tests", "ML.Xncf.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ML.Xncf.Docs", "ML.Xncf.Docs\ML.Xncf.Docs.csproj", "{71290C45-D090-4937-AEE4-58A8E92F23A2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ML.Xncf.Swagger", "ML.Xncf.Swagger\ML.Xncf.Swagger.csproj", "{CBD7512E-90D1-49F7-983A-BDABE7765616}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,12 @@ Global
 		{71290C45-D090-4937-AEE4-58A8E92F23A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71290C45-D090-4937-AEE4-58A8E92F23A2}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{71290C45-D090-4937-AEE4-58A8E92F23A2}.Test|Any CPU.Build.0 = Test|Any CPU
+		{CBD7512E-90D1-49F7-983A-BDABE7765616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD7512E-90D1-49F7-983A-BDABE7765616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD7512E-90D1-49F7-983A-BDABE7765616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD7512E-90D1-49F7-983A-BDABE7765616}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBD7512E-90D1-49F7-983A-BDABE7765616}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{CBD7512E-90D1-49F7-983A-BDABE7765616}.Test|Any CPU.Build.0 = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+        <Version>1.0.2-beta1</Version>
+        <AssemblyName>ML.Xncf.Swagger</AssemblyName>
+        <RootNamespace>ML.Xncf.Swagger</RootNamespace>
+        <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
+        <Description>接口说明文档</Description>
+        <Copyright>ML</Copyright>
+        <PackageTags>ML,MLTechnology,NeuCharFramework,NCF,ML.Xncf.Swagger</PackageTags>
+        <Authors>MLTechnology</Authors>
+        <Owners>NeuCharFramework</Owners>
+        <PackageLicenseUrl>https://github.com/zhao365845726/ML.Xncf/blob/master/LICENSE</PackageLicenseUrl>
+        <Title>.接口说明文档</Title>
+        <ProjectUrl> https://github.com/NeuCharFramework/NCF </ProjectUrl>
+        <PackageProjectUrl>https://github.com/zhao365845726/ML.Xncf</PackageProjectUrl>
+        <PackageIconUrl>http://image.milisx.com/logox200.png</PackageIconUrl>
+        <PackageReleaseNotes>
+            v1.0 创世
+        </PackageReleaseNotes>
+        <RepositoryUrl> https://github.com/zhao365845726/ML.Xncf.git </RepositoryUrl>
+        <Configurations>Debug;Release;Test</Configurations>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>..\BuildOutPut</OutputPath>
+        <DocumentationFile>..\BuildOutPut\ML.Xncf.Swagger.XML</DocumentationFile>
+        <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+        <Optimize>true</Optimize>
+        <DebugType>pdbonly</DebugType>
+        <ErrorReport>prompt</ErrorReport>
+        <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <ItemGroup>
+      <Content Remove="swaggerconfig.json" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="index.html" />
+        <None Remove="login.html" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0-preview.1.21102.12" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.5" />
+        <PackageReference Include="Senparc.Ncf.AreaBase" Version="0.6.104-beta1" />
+        <PackageReference Include="Senparc.Ncf.XncfBase" Version="0.6.104-beta1" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="index.html" />
+        <EmbeddedResource Include="login.html" />
+        <EmbeddedResource Include="swaggerconfig.json" />
+    </ItemGroup>
+    <ItemGroup>
+      <Reference Include="Senparc.Core">
+        <HintPath>..\Lib\Senparc.Core.dll</HintPath>
+      </Reference>
+      <Reference Include="Senparc.Service">
+        <HintPath>..\Lib\Senparc.Service.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+
+</Project>
