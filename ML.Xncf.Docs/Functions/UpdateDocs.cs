@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using Senparc.CO2NET;
 using System.Diagnostics;
-using ML.Xncf.Docs.Util;
+using ML.Core;
 
 namespace ML.Xncf.Docs.Functions
 {
@@ -36,11 +36,8 @@ namespace ML.Xncf.Docs.Functions
         public override string Description => "从 GitHub 上更新最新的官方文档。官方地址：https://gitee.com/NeuCharFramework/NcfDocs";
         public override Type FunctionParameterType => typeof(UpdateDocs_Parameters);
 
-        public CMD cmdHelper;
-
         public UpdateDocs(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            cmdHelper = new CMD();
         }
 
         /// <summary>
