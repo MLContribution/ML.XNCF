@@ -5,7 +5,7 @@ using Senparc.Ncf.XncfBase.Database;
 
 namespace ML.Xncf.Docs.Models.DatabaseModel
 {
-    [MultipleMigrationDbContext(MultipleDatabaseType.SQLite, typeof(Register))]
+    [MultipleMigrationDbContext(MultipleDatabaseType.Sqlite, typeof(Register))]
     public class DocsSenparcEntities : XncfDatabaseDbContext
     {
         public DocsSenparcEntities(DbContextOptions dbContextOptions) : base(dbContextOptions)

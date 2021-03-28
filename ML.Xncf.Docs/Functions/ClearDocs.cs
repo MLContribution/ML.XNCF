@@ -38,10 +38,16 @@ namespace ML.Xncf.Docs.Functions
                 var copyDir = Path.Combine(wwwrootDir, "NcfDocs");
                 try
                 {
-                    cmdHelper.ExeCommand($"TASKKILL /F /IM node.exe /T");
-                    cmdHelper.ExeCommand($"RD /s /q {copyDir}");
                     //清理目录
                     Directory.Delete(copyDir, true);
+                    cmdHelper.ExeCommand($"TASKKILL /F /IM node.exe /T");
+                    cmdHelper.ExeCommand($"RD /s /q {copyDir}-*");
+                    Random random = new Random();
+                    cmdHelper.ExeCommand($"ren NcfDocs NcfDoc-Old{string.Format("yyyyMMddHHmmss")}{random.Next(1000,9999)}");
+                    //cmdHelper.ExeCommand($"TASKKILL /F /IM iisexpresstray.exe /T");
+                    //cmdHelper.ExeCommand($"TASKKILL /F /IM iisexpress.exe /T");
+                    
+                    
                 }
                 catch (Exception)
                 {
