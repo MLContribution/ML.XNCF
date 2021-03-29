@@ -35,52 +35,106 @@ namespace ML.Xncf.Docs.Functions
                 var copyDir = Path.Combine(wwwrootDir, "NcfDocs");
                 try
                 {
-                    //Directory.Delete(copyDir, true);
-                    List<string> lstCMD = new List<string>();
-                    lstCMD.Add("TASKKILL /F /IM iisexpresstray.exe /T");
-                    lstCMD.Add("TASKKILL /F /IM iisexpress.exe /T");
-
-                    //cmdHelper.ExeCommand($"TASKKILL /F /IM iisexpresstray.exe /T");
-                    //cmdHelper.ExeCommand($"TASKKILL /F /IM iisexpress.exe /T");
-                    Random random = new Random();
-                    sb.Append($"wwwrootDir：{wwwrootDir}\r\n");
-                    sb.Append($"copyDir：{copyDir}\r\n");
-                    string[] saDir = DirFileHelper.GetDirectories(wwwrootDir);
-                    sb.Append($"saDir:{saDir.ToJson()}");
-                    for(int i = 0; i < saDir.Length; i++)
-                    {
-                        string[] saDirPath = saDir[i].Split("\\");
-                        string dirName = saDirPath[saDirPath.Length - 1];
-                        //sb.Append($"dirName:{dirName}");
-                        if (dirName.Equals("NcfDocs"))
-                        {
-                            lstCMD.Add($"cd {wwwrootDir}");
-                            sb.Append($"dirName----{dirName}         ");
-                            string strNewName = $"NcfDocs-Old{DateTime.Now.ToString("yyyyMMddHHmmss")}{random.Next(1000, 9999).ToString()}";
-                            lstCMD.Add($"REN NcfDocs {strNewName}");
-                        }
-                        else if (dirName.Contains("NcfDocs-Old"))
-                        {
-                            lstCMD.Add($"RD /S /Q {Path.Combine(wwwrootDir, dirName)}");
-                            
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                        lstCMD.Add($"RD /S /Q {copyDir}");
-                    }
-                    string strExecRes = CmdHelper.ExeCommand(lstCMD.ToArray());
-                    //sb.Append(strExecRes);
+                    //执行Dos命令
+                    sb = ExecDosCommand(sb,wwwrootDir, copyDir);
+                    //写入批处理文件并执行
+                    //sb = WriteBatchFile(sb, wwwrootDir, copyDir);
                 }
                 catch (Exception)
                 {
                     sb.AppendLine("清理失败");
                 }
                 //sb.AppendLine($"清理目录 {copyDir}");
-
+                //\r\n<br /> {sb.ToString()}
                 result.Message = $"清理成功，清理时间：{DateTime.Now.ToLongDateString()} {DateTime.Now.ToLongTimeString()}";
             });
+        }
+
+        private StringBuilder ExecDosCommand(StringBuilder sb,string rootPath,string destPath)
+        {
+            List<string> lstCMD = new List<string>();
+            Random random = new Random();
+            sb.Append($"wwwrootDir：{rootPath}\r\n");
+            sb.Append($"copyDir：{destPath}\r\n");
+            string[] saDir = DirFileHelper.GetDirectories(rootPath);
+            sb.Append($"saDir:{saDir.ToJson()}");
+            for (int i = 0; i < saDir.Length; i++)
+            {
+                string[] saDirPath = saDir[i].Split("\\");
+                string dirName = saDirPath[saDirPath.Length - 1];
+                //sb.Append($"dirName:{dirName}");
+                if (dirName.Equals("NcfDocs"))
+                {
+                    lstCMD.Add($"cd wwwroot");
+                    sb.Append($"dirName----{dirName}         ");
+                    string strNewName = $"NcfDocs-Old{DateTime.Now.ToString("yyyyMMddHHmmss")}{random.Next(1000, 9999).ToString()}";
+                    lstCMD.Add($"REN NcfDocs {strNewName}");
+                    continue;
+                }
+                else if (dirName.Contains("NcfDocs-Old"))
+                {
+                    lstCMD.Add($"RD /S /Q {dirName}");
+                    continue;
+                }
+                else
+                {
+                    continue;
+                }
+                //lstCMD.Add($"RD /S /Q {destPath}");
+            }
+            string strExecRes = CmdHelper.ExeCommand(lstCMD.ToArray());
+            sb.Append(strExecRes);
+            return sb;
+        }
+
+        private StringBuilder WriteBatchFile(StringBuilder sb, string rootPath, string destPath)
+        {
+            string strFile = $"{rootPath}\\ClearDoc.bat";
+            if (!File.Exists(strFile))
+            {
+                FileStream mapFile = File.Open(strFile, FileMode.Append);
+                StringBuilder sbBody = new StringBuilder();
+
+                List<string> lstCMD = new List<string>();
+                Random random = new Random();
+                string[] saDir = DirFileHelper.GetDirectories(rootPath);
+                for (int i = 0; i < saDir.Length; i++)
+                {
+                    string[] saDirPath = saDir[i].Split("\\");
+                    string dirName = saDirPath[saDirPath.Length - 1];
+                    if (dirName.Equals("NcfDocs"))
+                    {
+                        sbBody.AppendLine($"cd {rootPath}");
+                        lstCMD.Add($"cd {rootPath}");
+                        string strNewName = $"{rootPath}\\NcfDocs-Old{DateTime.Now.ToString("yyyyMMddHHmmss")}{random.Next(1000, 9999).ToString()}";
+                        sbBody.AppendLine($"REN {rootPath}\\NcfDocs {strNewName}");
+                        lstCMD.Add($"REN {rootPath}\\NcfDocs {strNewName}");
+                        continue;
+                    }
+                    else if (dirName.Contains("NcfDocs-Old"))
+                    {
+                        sbBody.AppendLine($"RD /S /Q {Path.Combine(rootPath, dirName)}");
+                        lstCMD.Add($"RD /S /Q {Path.Combine(rootPath, dirName)}");
+                        continue;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                    //sbBody.AppendLine($"RD /S /Q {destPath}");
+                    //lstCMD.Add($"RD /S /Q {destPath}");
+                }
+                //string strExecRes = CmdHelper.ExeCommand(lstCMD.ToArray());
+                sbBody.AppendLine($"DEL /S /Q {rootPath}\\ClearDoc.bat");
+                //sbBody.Append($"new AreaPageMenuItem(GetAreaUrl($\"/Admin/{strFileName}/Index\"),\"用户管理\",\"fa fa-bookmark-o\"),\r\n");
+                byte[] cMapFile = Encoding.UTF8.GetBytes(sbBody.ToString());
+                mapFile.Write(cMapFile, 0, cMapFile.Length);
+                mapFile.Close();
+            }
+            Thread.Sleep(3000);
+            CmdHelper.StartAppointApp($"{rootPath}\\ClearDoc.bat");
+            sb.AppendLine($"{rootPath}\\ClearDoc.bat");
+            return sb;
         }
     }
 }
