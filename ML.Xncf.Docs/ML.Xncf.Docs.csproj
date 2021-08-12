@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <Version>2.1.6</Version>
+        <Version>2.1.7.1</Version>
         <AssemblyName>ML.Xncf.Docs</AssemblyName>
         <RootNamespace>ML.Xncf.Docs</RootNamespace>
         <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
@@ -32,7 +32,7 @@
 			v2.0.107 兼容支持.net core 3.1和.net core 5
 			v2.0.115 修复已知的bug
 			v2.1.1 修复已知的错误
-			v2.1.6 优化静态文件读取
+			v2.1.7 优化静态文件读取
 		</PackageReleaseNotes>
         <RepositoryUrl> https://github.com/zhao365845726/ML.Xncf.git </RepositoryUrl>
         <Configurations>Debug;Release;Test</Configurations>
