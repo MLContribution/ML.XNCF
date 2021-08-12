@@ -15,19 +15,31 @@ namespace ML.Xncf.Docs
     {
         public IApplicationBuilder UseMiddleware(IApplicationBuilder app)
         {
-            app.Map("/Docs", builder =>
+            app.Map("/Docs",async builder =>
              {
                  var indexHtmlFileDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, "NcfDocs\\cn\\docs\\assets\\");
                  var indexHtmlFilePath = Path.Combine(indexHtmlFileDir, "index.html");
 
-                 if (!Directory.Exists(indexHtmlFileDir) && !File.Exists(indexHtmlFilePath))
+                 if (!File.Exists(indexHtmlFilePath))
                  {
                      using (var scope = app.ApplicationServices.CreateScope())
                      {
                          UpdateDocs updateDocs = new UpdateDocs(scope.ServiceProvider);
                          updateDocs.Run(new UpdateDocs_Parameters());
+
+                         //等待更新
+                         var dt1 = SystemTime.Now;
+                         while (SystemTime.NowDiff(dt1) < TimeSpan.FromSeconds(10))
+                         {
+                             if (File.Exists(indexHtmlFilePath))
+                             {
+                                 break;
+                             }
+                             await Task.Delay(1000);
+                         }
                      }
                  }
+
 
                  builder.Use(async (context, next) =>
                  {

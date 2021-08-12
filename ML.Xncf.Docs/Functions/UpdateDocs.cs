@@ -9,6 +9,7 @@ using System.IO;
 using Senparc.CO2NET;
 using System.Diagnostics;
 using ML.Core;
+using Senparc.CO2NET.Trace;
 
 namespace ML.Xncf.Docs.Functions
 {
@@ -66,15 +67,22 @@ namespace ML.Xncf.Docs.Functions
                    }
                    catch (Exception)
                    {
-                       var mergeResult = LibGit2Sharp.Commands.Pull(
-                                                 new Repository(copyDir),
-                                                 new Signature("zhao365845726@163.com", "zhao365845726@163.com", SystemTime.Now),
-                                                 new PullOptions());
+                       try
+                       {
+                           var mergeResult = LibGit2Sharp.Commands.Pull(
+                                                new Repository(copyDir),
+                                                new Signature("zhao365845726@163.com", "zhao365845726@163.com", SystemTime.Now),
+                                                new PullOptions());
 
-                       sb.AppendLine("已有文件存在，开始 pull 更新");
-                       sb.AppendLine(mergeResult.Status.ToString());
+                           sb.AppendLine("已有文件存在，开始 pull 更新");
+                           sb.AppendLine(mergeResult.Status.ToString());
+                       }
+                       catch (Exception ex)
+                       {
+                           SenparcTrace.BaseExceptionLog(ex);
+                       }
+                      
                    }
-
 
                    sb.AppendLine($"仓库创建于 {copyDir}");
 
