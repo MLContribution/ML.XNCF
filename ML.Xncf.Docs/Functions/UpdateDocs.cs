@@ -41,7 +41,7 @@ namespace ML.Xncf.Docs.Functions
         {
             for(int i = 0; i < lstBranchName.Count; i++)
             {
-                Repository.Clone(requestUrl, $"{distFolder}/{lstBranchName[i]}", new CloneOptions()
+                Repository.Clone(requestUrl, $"{distFolder}/branch/{lstBranchName[i]}", new CloneOptions()
                 {
                     IsBare = false,
                     Checkout = true,
@@ -74,28 +74,6 @@ namespace ML.Xncf.Docs.Functions
                        lstBranchName.Add("v1.0");
                        lstBranchName.Add("v2.0");
                        CloneRepository(gitUrl, copyDir, lstBranchName);
-
-                       ////获取release-0.3
-                       //Repository.Clone(gitUrl, $"{copyDir}/release-0.3", new CloneOptions()
-                       //{
-                       //    IsBare = false,
-                       //    Checkout = true,
-                       //    BranchName = "release-0.3"
-                       //});
-                       ////获取v1.0
-                       //Repository.Clone(gitUrl, $"{copyDir}/v1.0", new CloneOptions()
-                       //{
-                       //    IsBare = false,
-                       //    Checkout = true,
-                       //    BranchName = "v1.0"
-                       //});
-                       ////获取2.0
-                       //Repository.Clone(gitUrl, $"{copyDir}/v2.0", new CloneOptions()
-                       //{
-                       //    IsBare = false,
-                       //    Checkout = true,
-                       //    BranchName = "v2.0"
-                       //});
                    }
                    catch (Exception)
                    {
