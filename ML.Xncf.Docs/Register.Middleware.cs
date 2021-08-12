@@ -20,7 +20,7 @@ namespace ML.Xncf.Docs
                  var indexHtmlFileDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, "NcfDocs\\cn\\docs\\assets\\");
                  var indexHtmlFilePath = Path.Combine(indexHtmlFileDir, "index.html");
 
-                 if (!Directory.Exists(indexHtmlFileDir) || !File.Exists(indexHtmlFilePath))
+                 if (!Directory.Exists(indexHtmlFileDir) && !File.Exists(indexHtmlFilePath))
                  {
                      using (var scope = app.ApplicationServices.CreateScope())
                      {
@@ -32,7 +32,8 @@ namespace ML.Xncf.Docs
                  builder.Use(async (context, next) =>
                  {
                      context.Response.ContentType = "text/html; charset=utf-8";
-                     using (var fs = new FileStream(indexHtmlFilePath, FileMode.Open)) { 
+                     using (var fs = new FileStream(indexHtmlFilePath, FileMode.Open))
+                     {
                          await fs.CopyToAsync(context.Response.Body).ConfigureAwait(false);
                      }
                  });
