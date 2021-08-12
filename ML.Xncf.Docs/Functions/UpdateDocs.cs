@@ -1,15 +1,10 @@
 ﻿using LibGit2Sharp;
 using Senparc.CO2NET.Helpers;
-using Senparc.CO2NET.HttpUtility;
+using Senparc.CO2NET.Trace;
 using Senparc.Ncf.XncfBase;
 using Senparc.Ncf.XncfBase.Functions;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using Senparc.CO2NET;
-using System.Diagnostics;
-using ML.Core;
-using Senparc.CO2NET.Trace;
 
 namespace ML.Xncf.Docs.Functions
 {
@@ -81,7 +76,7 @@ namespace ML.Xncf.Docs.Functions
                        {
                            SenparcTrace.BaseExceptionLog(ex);
                        }
-                      
+
                    }
 
                    sb.AppendLine($"仓库创建于 {copyDir}");
@@ -130,6 +125,6 @@ namespace ML.Xncf.Docs.Functions
         //    });
         //}
 
-        
+
     }
 }
