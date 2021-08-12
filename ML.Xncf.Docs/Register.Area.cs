@@ -14,7 +14,7 @@ namespace ML.Xncf.Docs
 	{
 		#region IAreaRegister 接口
 
-		public string HomeUrl => "/Docs/Index";
+		public string HomeUrl => "/Docs";
 
 		public List<AreaPageMenuItem> AareaPageMenuItems => new List<AreaPageMenuItem>() {
 			 new AreaPageMenuItem(GetAreaHomeUrl(),"开发者文档中心","fa fa-laptop"),
