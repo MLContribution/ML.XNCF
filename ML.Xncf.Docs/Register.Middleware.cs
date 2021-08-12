@@ -21,12 +21,6 @@ namespace ML.Xncf.Docs
             var docDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, "NcfDocs\\cn\\docs\\doc\\");
             var assetsDir = Path.GetFullPath(Path.Combine(docDir, "..\\", "assets"));
 
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(assetsDir),
-                RequestPath = new PathString("/")
-            });
-
             app.Map("/Docs", async builder =>
               {
                   var indexHtmlFileDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, "NcfDocs\\cn\\docs\\assets\\");
@@ -39,8 +33,8 @@ namespace ML.Xncf.Docs
                           UpdateDocs updateDocs = new UpdateDocs(scope.ServiceProvider);
                           updateDocs.Run(new UpdateDocs_Parameters());
 
-                         //等待更新
-                         var dt1 = SystemTime.Now;
+                          //等待更新
+                          var dt1 = SystemTime.Now;
                           while (SystemTime.NowDiff(dt1) < TimeSpan.FromSeconds(10))
                           {
                               if (File.Exists(indexHtmlFilePath))
@@ -61,6 +55,13 @@ namespace ML.Xncf.Docs
                       }
                   });
               });
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(assetsDir),
+                RequestPath = new PathString("")
+            });
+
             return app;
         }
     }
