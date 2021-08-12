@@ -4,6 +4,7 @@ using Senparc.CO2NET.Trace;
 using Senparc.Ncf.XncfBase;
 using Senparc.Ncf.XncfBase.Functions;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ML.Xncf.Docs.Functions
@@ -36,6 +37,19 @@ namespace ML.Xncf.Docs.Functions
         {
         }
 
+        protected void CloneRepository(string requestUrl,string distFolder,List<string> lstBranchName)
+        {
+            for(int i = 0; i < lstBranchName.Count; i++)
+            {
+                Repository.Clone(requestUrl, $"{distFolder}/{lstBranchName[i]}", new CloneOptions()
+                {
+                    IsBare = false,
+                    Checkout = true,
+                    BranchName = lstBranchName[i]
+                });
+            }
+        }
+
         /// <summary>
         /// 运行
         /// </summary>
@@ -55,10 +69,33 @@ namespace ML.Xncf.Docs.Functions
                    var gitUrl = "https://gitee.com/NeuCharFramework/NcfDocs";
                    try
                    {
-                       Repository.Clone(gitUrl, copyDir, new CloneOptions()
-                       {
-                           IsBare = false
-                       });
+                       List<string> lstBranchName = new List<string>();
+                       lstBranchName.Add("release-0.3");
+                       lstBranchName.Add("v1.0");
+                       lstBranchName.Add("v2.0");
+                       CloneRepository(gitUrl, copyDir, lstBranchName);
+
+                       ////获取release-0.3
+                       //Repository.Clone(gitUrl, $"{copyDir}/release-0.3", new CloneOptions()
+                       //{
+                       //    IsBare = false,
+                       //    Checkout = true,
+                       //    BranchName = "release-0.3"
+                       //});
+                       ////获取v1.0
+                       //Repository.Clone(gitUrl, $"{copyDir}/v1.0", new CloneOptions()
+                       //{
+                       //    IsBare = false,
+                       //    Checkout = true,
+                       //    BranchName = "v1.0"
+                       //});
+                       ////获取2.0
+                       //Repository.Clone(gitUrl, $"{copyDir}/v2.0", new CloneOptions()
+                       //{
+                       //    IsBare = false,
+                       //    Checkout = true,
+                       //    BranchName = "v2.0"
+                       //});
                    }
                    catch (Exception)
                    {
