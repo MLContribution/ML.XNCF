@@ -7,6 +7,7 @@ using Senparc.Ncf.XncfBase.Functions;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ML.Core;
 
 namespace ML.Xncf.Docs.Functions
 {
@@ -46,8 +47,14 @@ namespace ML.Xncf.Docs.Functions
         {
         }
 
+        protected void CopyFolder(string sourcePath, string distPath, Dictionary<string,string> dicExclude)
+        {
+            DirFileHelper.CopyFolder(sourcePath, distPath, dicExclude);
+        }
+
         protected void CloneRepository(string requestUrl,string distFolder,List<string> lstBranchName)
         {
+            //克隆源
             for(int i = 0; i < lstBranchName.Count; i++)
             {
                 Repository.Clone(requestUrl, $"{distFolder}/branch/{lstBranchName[i]}", new CloneOptions()
@@ -56,6 +63,14 @@ namespace ML.Xncf.Docs.Functions
                     Checkout = true,
                     BranchName = lstBranchName[i]
                 });
+            }
+            //定义排除文件及文件夹
+            Dictionary<string, string> dicExclude = new Dictionary<string, string>();
+            dicExclude.Add("FOLDER", ".git");
+            //复制
+            for (int j = 0; j < lstBranchName.Count; j++)
+            {
+                CopyFolder($"{distFolder}/branch/{lstBranchName[j]}", $"{distFolder}/{lstBranchName[j]}", dicExclude);
             }
         }
 
