@@ -18,12 +18,13 @@ namespace ML.Xncf.Docs
     {
         public IApplicationBuilder UseMiddleware(IApplicationBuilder app)
         {
-            var docDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, "NcfDocs\\cn\\docs\\doc\\");
+            string defaultBranck = "release-0.3";
+            var docDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, $"NcfDocs\\{defaultBranck}\\cn\\docs\\doc\\");
             var assetsDir = Path.GetFullPath(Path.Combine(docDir, "..\\", "assets"));
 
             app.Map("/Docs", async builder =>
               {
-                  var indexHtmlFileDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, "NcfDocs\\cn\\docs\\assets\\");
+                  var indexHtmlFileDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, $"NcfDocs\\{defaultBranck}\\cn\\docs\\assets\\");
                   var indexHtmlFilePath = Path.Combine(indexHtmlFileDir, "index.html");
 
                   if (!File.Exists(indexHtmlFilePath))
