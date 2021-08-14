@@ -25,6 +25,7 @@ namespace ML.Xncf.Docs.Functions
         public class UpdateDocs_Version
         {
             public string Version { get; set; }
+            public string DefaultBranck { get; set; }
             public List<string> StableBranch { get; set; }
             public DateTime UpdateTime { get; set; }
             public string WhatsNew { get; set; }
@@ -96,6 +97,28 @@ namespace ML.Xncf.Docs.Functions
             return versionData.StableBranch;
         }
 
+        protected List<string> CloneSpecifiedRepositoryVersion(string requestUrl, string distFolder,string branchName)
+        {
+            Repository.Clone(requestUrl, $"{distFolder}/branch/{branchName}", new CloneOptions()
+            {
+                IsBare = false,
+                Checkout = true,
+                BranchName = branchName
+            });
+
+            UpdateDocs_Version versionData = null;
+            var versionFile = Path.Combine($"{distFolder}/branch/{branchName}", "version.json");
+            using (var fs = new FileStream(versionFile, FileMode.Open))
+            {
+                using (var sr = new StreamReader(fs))
+                {
+                    var versionJson = sr.ReadToEnd();
+                    versionData = versionJson.GetObject<UpdateDocs_Version>();
+                }
+            }
+            return versionData.StableBranch;
+        }
+
         /// <summary>
         /// 运行
         /// </summary>
@@ -116,11 +139,8 @@ namespace ML.Xncf.Docs.Functions
                    try
                    {
                        List<string> lstBranchName = new List<string>();
-                       lstBranchName = CloneMasterRepositoryVersion(gitUrl, copyDir);
-                       //SenparcTrace.Log(lstBranchName.ToJson());
-                       //lstBranchName.Add("release-0.3");
-                       //lstBranchName.Add("v1.0");
-                       //lstBranchName.Add("v2.0");
+                       lstBranchName = CloneSpecifiedRepositoryVersion(gitUrl, copyDir,"Developer-zmz");
+                       SenparcTrace.Log(lstBranchName.ToJson());
                        CloneRepository(gitUrl, copyDir, lstBranchName);
                    }
                    catch (Exception)
@@ -145,7 +165,7 @@ namespace ML.Xncf.Docs.Functions
                    sb.AppendLine($"仓库创建于 {copyDir}");
 
                    UpdateDocs_Version versionData = null;
-                   var versionFile = Path.Combine($"{copyDir}/branch/master", "version.json");
+                   var versionFile = Path.Combine($"{copyDir}/branch/Developer-zmz", "version.json");
                    using (var fs = new FileStream(versionFile, FileMode.Open))
                    {
                        using (var sr = new StreamReader(fs))

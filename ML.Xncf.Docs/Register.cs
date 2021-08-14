@@ -20,7 +20,7 @@ namespace ML.Xncf.Docs
 
         public override string Uid => "C31EB06B-D0EE-4356-9313-9DD842E0B9D2";//必须确保全局唯一，生成后必须固定，已自动生成，也可自行修改
 
-        public override string Version => "2.1.7.7";//必须填写版本号
+        public override string Version => "2.1.7.13";//必须填写版本号
 
         public override string MenuName => "开发者文档";
 
