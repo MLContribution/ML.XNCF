@@ -18,7 +18,8 @@ namespace ML.Xncf.Docs
     {
         public IApplicationBuilder UseMiddleware(IApplicationBuilder app)
         {
-            string defaultBranck = "release-0.3";
+            //string defaultBranck = "release-0.3";
+            string defaultBranck = "v1.0";
             var docDir = Path.Combine(Senparc.Ncf.Core.Config.SiteConfig.WebRootPath, $"NcfDocs\\{defaultBranck}\\cn\\docs\\doc\\");
             var assetsDir = Path.GetFullPath(Path.Combine(docDir, "..\\", "assets"));
 
