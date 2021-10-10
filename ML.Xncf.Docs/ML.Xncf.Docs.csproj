@@ -34,6 +34,7 @@
 			v2.1.1 修复已知的错误
 			v2.1.7 优化静态文件读取
       v2.1.7.7 优化获取文档多版本功能
+			v2.1.7.19 优化文档多版本已知的问题
 		</PackageReleaseNotes>
         <RepositoryUrl> https://github.com/zhao365845726/ML.Xncf.git </RepositoryUrl>
         <Configurations>Debug;Release;Test</Configurations>
