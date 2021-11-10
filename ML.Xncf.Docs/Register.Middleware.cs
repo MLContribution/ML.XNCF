@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using ML.Xncf.Docs.Functions;
 using Senparc.Ncf.XncfBase;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
-using static ML.Xncf.Docs.Functions.UpdateDocs;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.StaticFiles;
+using ML.Xncf.Docs.OHS.Local.AppService;
+using ML.Xncf.Docs.OHS.PL;
 
 namespace ML.Xncf.Docs
 {
@@ -32,8 +32,11 @@ namespace ML.Xncf.Docs
                   {
                       using (var scope = app.ApplicationServices.CreateScope())
                       {
-                          UpdateDocs updateDocs = new UpdateDocs(scope.ServiceProvider);
-                          updateDocs.Run(new UpdateDocs_Parameters());
+                          //更新文档
+                          var serviceProvider = scope.ServiceProvider; 
+                          UpdateDocsAppService updateDocsAppService = serviceProvider.GetService<UpdateDocsAppService>();
+                          var docsRunRequest = new Docs_RunRequest();
+                          await updateDocsAppService.Run(docsRunRequest);
 
                           //等待更新
                           var dt1 = SystemTime.Now;
